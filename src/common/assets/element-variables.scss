@@ -1,0 +1,15 @@
+// https://github.com/ElemeFE/element/blob/master/packages/theme-chalk/src/common/var.scss
+
+$--color-primary: #4b5cc4;
+$--color-warning: #e6a23c;
+$--color-success: #69b578;
+$--color-info: #696d7d;
+$--color-danger: #e55934;
+$--color-text-primary: #292f33;
+
+$--link-color: #5b6ac9;
+$--link-color-hover: $--color-primary;
+
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
+
+@import '~element-ui/packages/theme-chalk/src/index';

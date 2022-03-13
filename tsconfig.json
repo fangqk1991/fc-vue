@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "importHelpers": true,
+    "noEmitHelpers": true,
+    "lib": ["dom", "es2015"],
+    "module": "commonjs",
+    "declaration": true,
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "outDir": "lib",
+    "strict": true,
+    "target": "es5",
+    "noImplicitAny": true,
+    "skipLibCheck": true,
+    "downlevelIteration": true,
+    "suppressExcessPropertyErrors": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true
+  },
+  "include": ["src"]
+}
