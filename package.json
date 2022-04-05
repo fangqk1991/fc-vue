@@ -3,8 +3,9 @@
   "version": "0.2.1",
   "main": "src/index.ts",
   "scripts": {
-    "test": "nyc mocha --require ts-node/register tests/**/*.test.ts --timeout 1000000 --exit",
-    "build": "rm -rf ./lib/ && tsc"
+    "start": "webpack-dev-server --config webpack.dev.js",
+    "build": "rm -rf dist && webpack --config webpack.test.js",
+    "test": "rm -rf dist && webpack --config webpack.test.js"
   },
   "repository": "https://github.com/fangqk1991/fc-vue.git",
   "keywords": [
@@ -23,6 +24,7 @@
     "vue-router": "^3.1.5"
   },
   "devDependencies": {
+    "@fangcha/webpack": "^0.4.0",
     "@fangcha/eslint": "^0.2.0",
     "@types/assert": "^1.5.4",
     "@types/mocha": "^8.2.2",
