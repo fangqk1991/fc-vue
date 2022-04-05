@@ -46,7 +46,9 @@
     "trailingComma": "es5"
   },
   "files": [
-    "src/*"
+    "src/*",
+    "bootstrap/*",
+    "fangcha/*"
   ],
   "nyc": {
     "sourceMap": false

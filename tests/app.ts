@@ -1,4 +1,4 @@
-import '../src/fangcha/fc-styles.scss'
+import '../fangcha/fc-styles.scss'
 import { AppView } from './AppView'
 
 new AppView({
