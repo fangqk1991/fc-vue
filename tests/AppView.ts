@@ -2,12 +2,18 @@ import { Component, ViewController } from '..'
 
 @Component({
   template: `
-    <div>
-      <h4>AppView</h4>
-      <ul>
-        <li>el-icon-arrow-down: <i class="el-icon-arrow-down"></i></li>
-      </ul>
-    </div>
+    <el-container class="fc-theme" style="height: 100vh; overflow-x: hidden; overflow-y: auto;">
+      <el-header class="app-header">
+        <div class="title-wrapper">
+          <div class="title">
+            Demo
+          </div>
+        </div>
+      </el-header>
+      <el-container>
+        <el-main></el-main>
+      </el-container>
+    </el-container>
   `,
 })
 export class AppView extends ViewController {}
