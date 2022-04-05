@@ -26,8 +26,8 @@ import { SelectOption } from '@fangcha/tools'
             <span>操作</span>
           </template>
           <template slot-scope="scope">
-            <el-button class="el-icon-plus" style="font-size: 24px; padding: 2px 4px; color: #4E5BBD;" @click="addEnumOption(scope.$index)" />
-            <el-button class="el-icon-delete" style="font-size: 24px; padding: 2px 4px; color: #4E5BBD;" @click="removeEnumOption(scope.$index)" />
+            <el-button class="el-icon-plus action-icon" @click="addEnumOption(scope.$index)" />
+            <el-button class="el-icon-delete action-icon" @click="removeEnumOption(scope.$index)" />
           </template>
         </el-table-column>
       </el-table>

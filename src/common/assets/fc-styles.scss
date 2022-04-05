@@ -295,3 +295,23 @@ pre.my-pre {
     cursor: not-allowed;
   }
 }
+
+.action-icon {
+  font-size: 24px;
+  padding: 2px 4px;
+  color: #4e5bbd;
+}
+
+.action-icon-small {
+  font-size: 14px;
+  padding: 2px;
+  color: #4e5bbd;
+}
+
+.admin-only {
+  background: #fddee3;
+  &:after {
+    content: '[admin]';
+    color: red;
+  }
+}
