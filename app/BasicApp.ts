@@ -7,7 +7,7 @@ import * as moment from 'moment'
 import { i18n } from '../src/i18n'
 import { NotificationCenter } from 'notification-center-js'
 import { Page404 } from './views/Page404'
-import { I18nCode, I18nCodeDescriptor, MyConstants, MyNotificationKeys, SimpleVisitor } from '@fangcha/tools'
+import { I18nCode, I18nCodeDescriptor, MyConstants, MyNotificationKeys, SimpleVisitor, sleep } from '@fangcha/tools'
 import { RootView } from '../src/RootView'
 import { ViewController } from '../src/ViewController'
 const cookie = require('cookie-browser')
@@ -96,6 +96,10 @@ export class BasicApp implements BasicAppProtocol {
         },
       ],
     })
+    router.beforeEach(async (_to, _from, next) => {
+      await this.waitForReady()
+      next()
+    })
     this.router = router
 
     const appWillLoad = this.config.appWillLoad || (() => {})
@@ -112,5 +116,12 @@ export class BasicApp implements BasicAppProtocol {
       this.isReady = true
     }
     handler()
+  }
+
+  public async waitForReady() {
+    while (!this.isReady) {
+      console.info(`App is waiting for ready...`)
+      await sleep(100)
+    }
   }
 }
