@@ -2,7 +2,7 @@ import '../src/plugins/element-ui-plugin'
 import '../fangcha/fc-styles.scss'
 import { BasicAppProtocol } from './BasicAppProtocol'
 import { Component, Vue } from 'vue-property-decorator'
-import VueRouter, { RouteConfig } from 'vue-router'
+import VueRouter, { NavigationGuard, RouteConfig } from 'vue-router'
 import * as moment from 'moment'
 import { i18n } from '../src/i18n'
 import { NotificationCenter } from 'notification-center-js'
@@ -27,6 +27,7 @@ interface Params {
   routes?: RouteConfig[]
   appWillLoad?: () => void
   appDidLoad?: () => Promise<void>
+  guardBeforeEachRoute?: NavigationGuard
 }
 
 export class BasicApp implements BasicAppProtocol {
@@ -96,8 +97,11 @@ export class BasicApp implements BasicAppProtocol {
         },
       ],
     })
-    router.beforeEach(async (_to, _from, next) => {
+    router.beforeEach(async (to, from, next) => {
       await this.waitForReady()
+      if (this.config.guardBeforeEachRoute) {
+        return this.config.guardBeforeEachRoute(to, from, next)
+      }
       next()
     })
     this.router = router
