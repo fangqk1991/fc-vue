@@ -112,14 +112,8 @@ export class AdminApp extends BasicApp {
     return ''
   }
 
-  protected realRoutes(routes: RouteConfig[]) {
-    return [
-      {
-        path: '',
-        component: AppView,
-        children: routes,
-      },
-    ]
+  protected MainLayout() {
+    return AppView
   }
 
   protected async _appDidLoad() {

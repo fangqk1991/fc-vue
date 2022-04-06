@@ -60,11 +60,7 @@ export class BasicApp implements BasicAppProtocol {
     return I18nCodeDescriptor.checkValueValid(locale) ? locale : I18nCode.en
   }
 
-  protected realRoutes(routes: RouteConfig[]) {
-    return routes
-  }
-
-  protected prepareRouter() {
+  protected MainLayout() {
     const app = this
     @Component({
       template: `
@@ -75,7 +71,10 @@ export class BasicApp implements BasicAppProtocol {
     class MainLayout extends ViewController {
       $app: any = app
     }
+    return MainLayout
+  }
 
+  protected prepareRouter() {
     const routes: RouteConfig[] = []
     if (this.config.routes) {
       routes.push(...this.config.routes)
@@ -90,8 +89,8 @@ export class BasicApp implements BasicAppProtocol {
       routes: [
         {
           path: '',
-          component: MainLayout,
-          children: this.realRoutes(routes),
+          component: this.MainLayout(),
+          children: routes,
         },
       ],
     })
