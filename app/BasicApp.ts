@@ -83,7 +83,7 @@ export class BasicApp implements BasicAppProtocol {
       `,
     })
     class MainLayout extends ViewController {
-      $app = app
+      $app: any = app
     }
 
     const router = new VueRouter({
