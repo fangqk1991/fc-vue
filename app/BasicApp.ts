@@ -32,8 +32,6 @@ interface Params {
 
 export class BasicApp implements BasicAppProtocol {
   public config!: Params
-  public router!: VueRouter
-
   public isReady = false
 
   // 为做到响应式而进行赋值
@@ -62,20 +60,11 @@ export class BasicApp implements BasicAppProtocol {
     return I18nCodeDescriptor.checkValueValid(locale) ? locale : I18nCode.en
   }
 
-  public launch() {
-    i18n.locale = this.getLocale() === I18nCode.zhHans ? 'zh' : 'en'
-    Vue.use(VueRouter)
-    const routes: RouteConfig[] = []
-    if (this.config.routes) {
-      routes.push(...this.config.routes)
-    }
-    routes.push({
-      path: '*',
-      component: Page404,
-      name: 'Page404',
-    })
+  protected realRoutes(routes: RouteConfig[]) {
+    return routes
+  }
 
-    Vue.prototype.$app = this
+  protected prepareRouter() {
     const app = this
     @Component({
       template: `
@@ -87,13 +76,22 @@ export class BasicApp implements BasicAppProtocol {
       $app: any = app
     }
 
+    const routes: RouteConfig[] = []
+    if (this.config.routes) {
+      routes.push(...this.config.routes)
+    }
+    routes.push({
+      path: '*',
+      component: Page404,
+      name: 'Page404',
+    })
     const router = new VueRouter({
       mode: 'history',
       routes: [
         {
           path: '',
           component: MainLayout,
-          children: routes,
+          children: this.realRoutes(routes),
         },
       ],
     })
@@ -104,8 +102,17 @@ export class BasicApp implements BasicAppProtocol {
       }
       next()
     })
-    this.router = router
+    return router
+  }
 
+  protected async _appDidLoad() {}
+
+  public launch() {
+    i18n.locale = this.getLocale() === I18nCode.zhHans ? 'zh' : 'en'
+    Vue.use(VueRouter)
+    Vue.prototype.$app = this
+
+    const router = this.prepareRouter()
     const appWillLoad = this.config.appWillLoad || (() => {})
     appWillLoad()
 
@@ -115,6 +122,7 @@ export class BasicApp implements BasicAppProtocol {
       i18n: i18n,
     })
     const handler = async () => {
+      await this._appDidLoad()
       const appDidLoad = this.config.appDidLoad || (async () => {})
       await appDidLoad()
       this.isReady = true

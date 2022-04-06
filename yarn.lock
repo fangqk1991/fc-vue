@@ -1045,10 +1045,10 @@
     eslint-plugin-vue "^6.1.2"
     prettier "^2.5.1"
 
-"@fangcha/tools@^1.15.2":
-  version "1.15.2"
-  resolved "https://registry.yarnpkg.com/@fangcha/tools/-/tools-1.15.2.tgz#46e8d25efe58643d526a02988f495266a63e75dd"
-  integrity sha512-5ZsU9lsuislSQDKR3TUa/XTJMeVa5BHXOST/IKbxgpOH19Z0wZez22DUl0RH+KqhJEXCMfahySKnpUBlFiE8bQ==
+"@fangcha/tools@^1.16.0":
+  version "1.16.0"
+  resolved "https://registry.yarnpkg.com/@fangcha/tools/-/tools-1.16.0.tgz#28942ed5e9b7be4a27b0f69293e6997015b368f9"
+  integrity sha512-UCWj8uqCzgG0ipVO+daZVvddbZcEL/+nrdtpI0VabwuGl42wJYrnOB/DRGanEU4+z7wn3BKB4TOAr2p0MNmRLA==
   dependencies:
     moment "^2.29.1"
     tslib "^2.3.1"

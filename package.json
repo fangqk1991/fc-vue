@@ -1,9 +1,10 @@
 {
   "name": "@fangcha/vue",
-  "version": "0.7.3",
+  "version": "0.8.0",
   "main": "src/index.ts",
   "scripts": {
     "start": "webpack-dev-server --config webpack.dev.js",
+    "start-admin": "webpack-dev-server --config webpack.admin-dev.js",
     "build": "rm -rf dist && webpack --config webpack.test.js",
     "test": "rm -rf dist && webpack --config webpack.test.js"
   },
@@ -14,7 +15,7 @@
   "author": "fang <me@fangqk.com>",
   "license": "MIT",
   "dependencies": {
-    "@fangcha/tools": "^1.15.2",
+    "@fangcha/tools": "^1.16.0",
     "element-ui": "^2.13.0",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.2",

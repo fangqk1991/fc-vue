@@ -25,6 +25,7 @@
     "sourceMap": true
   },
   "include": [
+    "./app-admin",
     "./tests"
   ],
   "exclude": ["node_modules"]
