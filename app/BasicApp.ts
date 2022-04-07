@@ -35,6 +35,7 @@ interface Params {
 export class BasicApp implements BasicAppProtocol {
   public config!: Params
   public isReady = false
+  public router!: VueRouter
 
   // 为做到响应式而进行赋值
   public visitorInfo: SimpleVisitor = null as any
@@ -110,6 +111,7 @@ export class BasicApp implements BasicAppProtocol {
       }
       next()
     })
+    this.router = router
     return router
   }
 

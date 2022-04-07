@@ -31,7 +31,6 @@ interface Params {
 
 export class AdminApp extends BasicApp {
   public config!: Params
-  public router!: VueRouter
 
   isReady = false
   // 为做到响应式而进行赋值
