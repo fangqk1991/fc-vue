@@ -10,6 +10,7 @@ import { Page404 } from './views/Page404'
 import { I18nCode, I18nCodeDescriptor, MyConstants, MyNotificationKeys, SimpleVisitor, sleep } from '@fangcha/tools'
 import { RootView } from '../src/RootView'
 import { ViewController } from '../src/ViewController'
+import { FrontendPluginProtocol } from '../basic'
 const cookie = require('cookie-browser')
 
 Vue.filter('ISO8601', function (val: any) {
@@ -30,6 +31,7 @@ interface Params {
   guardBeforeEachRoute?: NavigationGuard
   mainLayout?: typeof Vue
   homeView?: typeof Vue
+  plugins?: FrontendPluginProtocol[]
 }
 
 export class BasicApp implements BasicAppProtocol {
@@ -46,6 +48,10 @@ export class BasicApp implements BasicAppProtocol {
 
   public constructor(options: Params) {
     this.config = options
+  }
+
+  public plugins() {
+    return this.config.plugins || []
   }
 
   public setLocale(locale: I18nCode) {
@@ -86,6 +92,11 @@ export class BasicApp implements BasicAppProtocol {
         name: 'HomeView',
       })
     }
+    for (const plugin of this.plugins()) {
+      if (plugin.routes) {
+        routes.push(...plugin.routes)
+      }
+    }
     if (this.config.routes) {
       routes.push(...this.config.routes)
     }
@@ -118,6 +129,7 @@ export class BasicApp implements BasicAppProtocol {
   protected async _appDidLoad() {}
 
   public launch() {
+    const plugins = this.plugins()
     i18n.locale = this.getLocale() === I18nCode.zhHans ? 'zh' : 'en'
     Vue.use(VueRouter)
     Vue.prototype.$app = this
@@ -125,6 +137,11 @@ export class BasicApp implements BasicAppProtocol {
     const router = this.prepareRouter()
     const appWillLoad = this.config.appWillLoad || (() => {})
     appWillLoad()
+    for (const plugin of plugins) {
+      if (plugin.onAppWillLoad) {
+        plugin.onAppWillLoad()
+      }
+    }
 
     new RootView({
       el: '#app',
@@ -135,6 +152,11 @@ export class BasicApp implements BasicAppProtocol {
       await this._appDidLoad()
       const appDidLoad = this.config.appDidLoad || (async () => {})
       await appDidLoad()
+      for (const plugin of plugins) {
+        if (plugin.onAppDidLoad) {
+          await plugin.onAppDidLoad()
+        }
+      }
       this.isReady = true
     }
     handler()

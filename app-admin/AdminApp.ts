@@ -5,7 +5,7 @@ import { VisitorInfo } from '@fangcha/tools'
 import { BasicApp } from '../app'
 import { MenuMainNode, MenuSubNode } from '../src/sidebars'
 import { i18n } from '../src/i18n'
-import { AxiosSettings } from '../basic'
+import { AxiosSettings, FrontendPluginProtocol } from '../basic'
 import { AppView } from './views/AppView'
 
 interface Params {
@@ -27,6 +27,8 @@ interface Params {
 
   mainLayout?: typeof Vue
   homeView?: typeof Vue
+
+  plugins?: FrontendPluginProtocol[]
 }
 
 export class AdminApp extends BasicApp {
