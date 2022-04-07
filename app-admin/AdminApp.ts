@@ -1,5 +1,5 @@
 import { Vue } from 'vue-property-decorator'
-import VueRouter, { NavigationGuard, RouteConfig } from 'vue-router'
+import { NavigationGuard, RouteConfig } from 'vue-router'
 import { NotificationCenter } from 'notification-center-js'
 import { VisitorInfo } from '@fangcha/tools'
 import { BasicApp } from '../app'
