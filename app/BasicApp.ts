@@ -28,8 +28,8 @@ interface Params {
   appWillLoad?: () => void
   appDidLoad?: () => Promise<void>
   guardBeforeEachRoute?: NavigationGuard
-  mainLayout?: { new (): Vue }
-  homeView?: { new (): Vue }
+  mainLayout?: typeof Vue
+  homeView?: typeof Vue
 }
 
 export class BasicApp implements BasicAppProtocol {
