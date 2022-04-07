@@ -28,6 +28,7 @@ interface Params {
   appWillLoad?: () => void
   appDidLoad?: () => Promise<void>
   guardBeforeEachRoute?: NavigationGuard
+  mainLayout?: { new (): Vue }
 }
 
 export class BasicApp implements BasicAppProtocol {
@@ -60,7 +61,7 @@ export class BasicApp implements BasicAppProtocol {
     return I18nCodeDescriptor.checkValueValid(locale) ? locale : I18nCode.en
   }
 
-  protected MainLayout() {
+  private MainLayout() {
     const app = this
     @Component({
       template: `
@@ -89,7 +90,7 @@ export class BasicApp implements BasicAppProtocol {
       routes: [
         {
           path: '',
-          component: this.MainLayout(),
+          component: this.config.mainLayout || this.MainLayout(),
           children: routes,
         },
       ],

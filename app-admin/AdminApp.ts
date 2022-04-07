@@ -24,6 +24,8 @@ interface Params {
   sidebarUniqueOpened?: boolean
   view403?: { new (): Vue }
   allowAnonymous?: boolean
+
+  mainLayout?: { new (): Vue }
 }
 
 export class AdminApp extends BasicApp {
@@ -74,6 +76,7 @@ export class AdminApp extends BasicApp {
     }
     options.loginUrl = options.loginUrl || '/api/v1/login'
     options.logoutUrl = options.logoutUrl || '/api/v1/logout'
+    options.mainLayout = AppView
     AxiosSettings.loginUrl = options.loginUrl
   }
 
@@ -110,10 +113,6 @@ export class AdminApp extends BasicApp {
       return route['require'] || ''
     }
     return ''
-  }
-
-  protected MainLayout() {
-    return AppView
   }
 
   protected async _appDidLoad() {
