@@ -26,6 +26,7 @@ interface Params {
   allowAnonymous?: boolean
 
   mainLayout?: { new (): Vue }
+  homeView?: { new (): Vue }
 }
 
 export class AdminApp extends BasicApp {

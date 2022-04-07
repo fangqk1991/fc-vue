@@ -3,9 +3,11 @@ import { AdminApp } from '../app-admin/AdminApp'
 import { Red_View } from './Red_View'
 import { Blue_View } from './Blue_View'
 import { VisitorInfo } from '@fangcha/tools'
+import { HomeView } from './HomeView'
 
 const app = new AdminApp({
   appName: 'Fangcha Admin',
+  homeView: HomeView,
   sidebarNodes: [
     {
       titleEn: 'Menu 1',

@@ -29,6 +29,7 @@ interface Params {
   appDidLoad?: () => Promise<void>
   guardBeforeEachRoute?: NavigationGuard
   mainLayout?: { new (): Vue }
+  homeView?: { new (): Vue }
 }
 
 export class BasicApp implements BasicAppProtocol {
@@ -77,6 +78,13 @@ export class BasicApp implements BasicAppProtocol {
 
   protected prepareRouter() {
     const routes: RouteConfig[] = []
+    if (this.config.homeView) {
+      routes.push({
+        path: '/',
+        component: this.config.homeView,
+        name: 'HomeView',
+      })
+    }
     if (this.config.routes) {
       routes.push(...this.config.routes)
     }
