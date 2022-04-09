@@ -2,7 +2,7 @@ import '../src/plugins/element-ui-plugin'
 import '../fangcha/fc-styles.scss'
 import { BasicAppProtocol } from './BasicAppProtocol'
 import { Component, Vue } from 'vue-property-decorator'
-import VueRouter, { NavigationGuard, RouteConfig } from 'vue-router'
+import VueRouter, { RouteConfig } from 'vue-router'
 import * as moment from 'moment'
 import { i18n } from '../src/i18n'
 import { NotificationCenter } from 'notification-center-js'
@@ -10,7 +10,7 @@ import { Page404 } from './views/Page404'
 import { I18nCode, I18nCodeDescriptor, MyConstants, MyNotificationKeys, SimpleVisitor, sleep } from '@fangcha/tools'
 import { RootView } from '../src/RootView'
 import { ViewController } from '../src/ViewController'
-import { FrontendPluginProtocol } from '../basic'
+import { BasicAppConfig } from './BasicAppConfig'
 const cookie = require('cookie-browser')
 
 Vue.filter('ISO8601', function (val: any) {
@@ -23,19 +23,8 @@ Vue.filter('describe_locale', function (val: any) {
   return I18nCodeDescriptor.describe(val)
 })
 
-interface Params {
-  appName?: string
-  routes?: RouteConfig[]
-  appWillLoad?: () => void
-  appDidLoad?: () => Promise<void>
-  guardBeforeEachRoute?: NavigationGuard
-  mainLayout?: typeof Vue
-  homeView?: typeof Vue
-  plugins?: FrontendPluginProtocol[]
-}
-
 export class BasicApp implements BasicAppProtocol {
-  public config!: Params
+  public config!: BasicAppConfig
   public isReady = false
   public router!: VueRouter
 
@@ -46,7 +35,7 @@ export class BasicApp implements BasicAppProtocol {
     return this.config.appName || ''
   }
 
-  public constructor(options: Params) {
+  public constructor(options: BasicAppConfig) {
     this.config = options
   }
 

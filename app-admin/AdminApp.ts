@@ -1,38 +1,15 @@
-import { Vue } from 'vue-property-decorator'
-import { NavigationGuard, RouteConfig } from 'vue-router'
+import { RouteConfig } from 'vue-router'
 import { NotificationCenter } from 'notification-center-js'
 import { VisitorInfo } from '@fangcha/tools'
 import { BasicApp } from '../app'
-import { MenuMainNode, MenuSubNode } from '../src/sidebars'
+import { MenuSubNode } from '../src/sidebars'
 import { i18n } from '../src/i18n'
-import { AxiosSettings, FrontendPluginProtocol } from '../basic'
+import { AxiosSettings } from '../basic'
 import { AppView } from './views/AppView'
-
-interface Params {
-  appName: string
-  sidebarNodes: MenuMainNode[]
-  routes: RouteConfig[]
-  reloadUserInfo: () => Promise<VisitorInfo>
-
-  loginUrl?: string
-  logoutUrl?: string
-
-  appWillLoad?: () => void
-  appDidLoad?: () => Promise<void>
-  guardBeforeEachRoute?: NavigationGuard
-
-  sidebarUniqueOpened?: boolean
-  view403?: { new (): Vue }
-  allowAnonymous?: boolean
-
-  mainLayout?: typeof Vue
-  homeView?: typeof Vue
-
-  plugins?: FrontendPluginProtocol[]
-}
+import { AdminAppConfig } from './AdminAppConfig'
 
 export class AdminApp extends BasicApp {
-  public config!: Params
+  public config!: AdminAppConfig
 
   isReady = false
   // 为做到响应式而进行赋值
@@ -40,7 +17,7 @@ export class AdminApp extends BasicApp {
 
   pathRouteMap: { [path: string]: RouteConfig } = {}
 
-  public constructor(options: Params) {
+  public constructor(options: AdminAppConfig) {
     super(options)
     {
       const allNodes = this.sidebarNodes().reduce((result, cur) => {
@@ -83,7 +60,7 @@ export class AdminApp extends BasicApp {
   }
 
   public async reloadUserInfo() {
-    this.visitorInfo = await this.config.reloadUserInfo()
+    this.visitorInfo = await this.config.reloadUserInfo!()
     return this.visitorInfo
   }
 
