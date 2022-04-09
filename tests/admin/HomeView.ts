@@ -1,4 +1,4 @@
-import { Component, ViewController } from '..'
+import { Component, ViewController } from '../../src'
 
 @Component({
   template: `

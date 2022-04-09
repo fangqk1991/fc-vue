@@ -1,17 +1,18 @@
 import '../fangcha/fc-styles.scss'
 import { AdminApp } from '../app-admin/AdminApp'
-import { Red_View } from './Red_View'
-import { Blue_View } from './Blue_View'
+import { Red_View } from './admin/Red_View'
+import { Blue_View } from './admin/Blue_View'
 import { VisitorInfo } from '@fangcha/tools'
-import { HomeView } from './HomeView'
+import { HomeView } from './admin/HomeView'
+import { DialogDemoView } from './admin/DialogDemoView'
 
 const app = new AdminApp({
   appName: 'Fangcha Admin',
   homeView: HomeView,
   sidebarNodes: [
     {
-      titleEn: 'Menu 1',
-      titleZh: 'Menu 1',
+      titleEn: 'Permission',
+      titleZh: 'Permission',
       icon: 'el-icon-user',
       links: [
         {
@@ -26,6 +27,18 @@ const app = new AdminApp({
         },
       ],
     },
+    {
+      titleEn: 'Components',
+      titleZh: 'Components',
+      icon: 'el-icon-menu',
+      links: [
+        {
+          titleEn: 'Dialogs',
+          titleZh: 'Dialogs',
+          path: '/v1/dialog',
+        },
+      ],
+    },
   ],
   routes: [
     {
@@ -37,6 +50,10 @@ const app = new AdminApp({
       path: '/v1/page-blue',
       require: 'Blue',
       component: Blue_View,
+    },
+    {
+      path: '/v1/dialog',
+      component: DialogDemoView,
     },
   ],
   reloadUserInfo: async (): Promise<VisitorInfo> => {
