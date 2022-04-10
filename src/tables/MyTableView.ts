@@ -3,7 +3,7 @@ import { MyPagination, PageInfo } from './MyPagination'
 import { ViewController } from '../ViewController'
 import '../plugins/vue-router-plugin'
 import '../plugins/element-ui-plugin'
-import { PageResult } from '@fangcha/tools'
+import { DiffMapper, PageResult } from '@fangcha/tools'
 import { ElTable } from 'element-ui/types/table'
 
 interface PageData {
@@ -164,6 +164,9 @@ export class MyTableView<T = any> extends ViewController {
       if (params[key] !== undefined || params[key] !== null) {
         queryParams[key] = params[key]
       }
+      if (typeof queryParams[key] === 'number') {
+        queryParams[key] = `${queryParams[key]}`
+      }
     })
 
     if (this.trimParams) {
@@ -179,10 +182,12 @@ export class MyTableView<T = any> extends ViewController {
       }
     }
 
-    this.$router.replace({
-      name: this.$route.name!,
-      query: queryParams,
-    })
+    if (!DiffMapper.checkEquals(this.$route.query, queryParams)) {
+      this.$router.replace({
+        path: this.$route.path,
+        query: queryParams,
+      })
+    }
   }
 
   private _oldRetainParams() {
