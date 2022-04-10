@@ -1,10 +1,11 @@
-import '../fangcha/fc-styles.scss'
 import { AdminApp } from '../app-admin/AdminApp'
 import { Red_View } from './admin/Red_View'
 import { Blue_View } from './admin/Blue_View'
 import { VisitorInfo } from '@fangcha/tools'
 import { HomeView } from './admin/HomeView'
 import { DialogDemoView } from './admin/DialogDemoView'
+import { TableDemoView } from './table/TableDemoView'
+import '../fangcha/fc-styles.scss'
 
 const app = new AdminApp({
   appName: 'Fangcha Admin',
@@ -35,7 +36,12 @@ const app = new AdminApp({
         {
           titleEn: 'Dialogs',
           titleZh: 'Dialogs',
-          path: '/v1/dialog',
+          path: '/v1/dialog-demo',
+        },
+        {
+          titleEn: 'Table Demo',
+          titleZh: 'Table Demo',
+          path: '/v1/table-demo',
         },
       ],
     },
@@ -52,8 +58,12 @@ const app = new AdminApp({
       component: Blue_View,
     },
     {
-      path: '/v1/dialog',
+      path: '/v1/dialog-demo',
       component: DialogDemoView,
+    },
+    {
+      path: '/v1/table-demo',
+      component: TableDemoView,
     },
   ],
   reloadUserInfo: async (): Promise<VisitorInfo> => {

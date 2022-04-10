@@ -51,6 +51,9 @@ const trimParams = (params: {}) => {
 }
 
 @Component({
+  components: {
+    'my-pagination': MyPagination,
+  },
   template: `
     <div>
       <slot name="header" />
@@ -78,9 +81,6 @@ const trimParams = (params: {}) => {
       <slot name="footer" />
     </div>
   `,
-  components: {
-    'my-pagination': MyPagination,
-  },
 })
 export class MyTableView<T = any> extends ViewController {
   @Prop({ default: '', type: [String, Function] }) readonly rowClassName!: string | Function
