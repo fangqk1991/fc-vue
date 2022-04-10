@@ -5,7 +5,7 @@ import { HtmlEditorDialog } from './HtmlEditorDialog'
 @Component({
   template: `
     <div>
-      <div class="mb-2">
+      <div v-if="editable" class="mb-2">
         <a href="javascript:" @click="onEdit">点击编辑</a>
       </div>
       <iframe v-if="showIframe" width="100%" height="100%" :srcdoc="myValue" />
@@ -14,6 +14,7 @@ import { HtmlEditorDialog } from './HtmlEditorDialog'
 })
 export class HtmlDisplayPanel extends ViewController {
   @Prop({ default: false, type: Boolean }) readonly showIframe!: boolean
+  @Prop({ default: true, type: Boolean }) readonly editable!: boolean
 
   @Model('update:value', { type: String, default: '' }) readonly value!: string
   myValue: string = ''

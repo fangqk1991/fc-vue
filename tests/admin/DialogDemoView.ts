@@ -15,7 +15,7 @@ import { Component, HtmlDisplayPanel, HtmlEditorDialog, HtmlPreviewDialog, ViewC
       </el-card>
       <el-card class="mt-3">
         <h4>HtmlDisplayPanel</h4>
-        <html-display-panel v-model="demoHTML" :show-iframe="true" />
+        <html-display-panel v-model="demoHTML" :show-iframe="true" :editable="true" />
       </el-card>
     </div>
   `,
