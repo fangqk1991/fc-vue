@@ -1,4 +1,4 @@
-import { AdminApp } from '../app-admin/AdminApp'
+import { AdminApp } from '../app-admin'
 import { Red_View } from './admin/Red_View'
 import { Blue_View } from './admin/Blue_View'
 import { VisitorInfo } from '@fangcha/tools'
@@ -6,6 +6,7 @@ import { HomeView } from './admin/HomeView'
 import { DialogDemoView } from './admin/DialogDemoView'
 import { TableDemoView } from './table/TableDemoView'
 import '../fangcha/fc-styles.scss'
+import { GridDemoView } from './table/GridDemoView'
 
 const app = new AdminApp({
   appName: 'Fangcha Admin',
@@ -39,9 +40,14 @@ const app = new AdminApp({
           path: '/v1/dialog-demo',
         },
         {
-          titleEn: 'Table Demo',
-          titleZh: 'Table Demo',
-          path: '/v1/table-demo',
+          titleEn: 'TableView Demo',
+          titleZh: 'TableView Demo',
+          path: '/v1/table-view-demo',
+        },
+        {
+          titleEn: 'GridView Demo',
+          titleZh: 'GridView Demo',
+          path: '/v1/grid-view-demo',
         },
       ],
     },
@@ -62,8 +68,12 @@ const app = new AdminApp({
       component: DialogDemoView,
     },
     {
-      path: '/v1/table-demo',
+      path: '/v1/table-view-demo',
       component: TableDemoView,
+    },
+    {
+      path: '/v1/grid-view-demo',
+      component: GridDemoView,
     },
   ],
   reloadUserInfo: async (): Promise<VisitorInfo> => {
