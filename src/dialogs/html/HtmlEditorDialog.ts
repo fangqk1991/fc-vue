@@ -1,7 +1,7 @@
 import { Component } from 'vue-property-decorator'
-import { TypicalDialogView } from './TypicalDialogView'
-import { TypicalDialog } from './TypicalDialog'
-import { CodeEditor } from '../widgets'
+import { TypicalDialogView } from '../TypicalDialogView'
+import { TypicalDialog } from '../TypicalDialog'
+import { CodeEditor } from '../../widgets'
 
 @Component({
   components: {

@@ -1,6 +1,6 @@
 import { Component } from 'vue-property-decorator'
-import { CustomDialogView } from './CustomDialogView'
-import { CustomDialog } from './CustomDialog'
+import { CustomDialogView } from '../CustomDialogView'
+import { CustomDialog } from '../CustomDialog'
 
 @Component({
   components: {

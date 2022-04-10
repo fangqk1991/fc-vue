@@ -1,13 +1,22 @@
-import { Component, HtmlEditorDialog, HtmlPreviewDialog, ViewController } from '../../src'
+import { Component, HtmlDisplayPanel, HtmlEditorDialog, HtmlPreviewDialog, ViewController } from '../../src'
 
 @Component({
+  components: {
+    'html-display-panel': HtmlDisplayPanel,
+  },
   template: `
     <div>
-      <h4>Dialogs</h4>
-      <div>
-        <el-button @click="onClick_HtmlPreviewDialog">HtmlPreviewDialog</el-button>
-        <el-button @click="onClick_HtmlEditorDialog">HtmlEditorDialog</el-button>
-      </div>
+      <el-card>
+        <h4>HTML Dialogs</h4>
+        <div>
+          <el-button @click="onClick_HtmlPreviewDialog">HtmlPreviewDialog</el-button>
+          <el-button @click="onClick_HtmlEditorDialog">HtmlEditorDialog</el-button>
+        </div>
+      </el-card>
+      <el-card class="mt-3">
+        <h4>HtmlDisplayPanel</h4>
+        <html-display-panel v-model="demoHTML" :show-iframe="true" />
+      </el-card>
     </div>
   `,
 })
