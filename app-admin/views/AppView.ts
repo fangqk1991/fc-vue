@@ -33,11 +33,11 @@ import { I18nCode, I18nCodeDescriptor } from '@fangcha/tools'
           <el-dropdown class="ml-2">
             <span class="el-dropdown-link"> {{ $app.visitorInfo.email }}<i class="el-icon-arrow-down el-icon--right"></i> </span>
             <el-dropdown-menu slot="dropdown">
-              <link-dropdown-item :link="$app.config.profileViewUrl">
+              <link-dropdown-item :link="$app.config.profileViewUrl" :use-router="true">
                 {{ $app.visitorInfo.name }}
                 <el-tag v-if="$app.visitorInfo.isAdmin" size="mini">管理员</el-tag>
               </link-dropdown-item>
-              <link-dropdown-item v-if="$app.config.useRemoteLocale" :link="$app.config.profileViewUrl">
+              <link-dropdown-item v-if="$app.config.useRemoteLocale" :link="$app.config.profileViewUrl" :use-router="true">
                 {{ locale() | describe_locale }} <i class="el-icon-setting"></i>
               </link-dropdown-item>
               <link-dropdown-item :link="$app.config.logoutUrl">{{ LS('Logout') }}</link-dropdown-item>
