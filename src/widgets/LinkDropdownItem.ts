@@ -2,12 +2,12 @@ import { Component, Prop } from 'vue-property-decorator'
 import { ViewController } from '../ViewController'
 @Component({
   template: `
-    <a :href="link" @click="$emit('click')">
+    <router-link :to="link" @click="$emit('click')">
       <el-dropdown-item :class="customClass">
         <img v-if="iconUrl" :src="iconUrl" alt='icon'/>
         <slot />
       </el-dropdown-item>
-    </a>
+    </router-link>
   `,
 })
 export class LinkDropdownItem extends ViewController {
