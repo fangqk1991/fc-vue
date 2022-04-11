@@ -1,7 +1,7 @@
 import { AdminApp } from '../app-admin'
 import { Red_View } from './admin/Red_View'
 import { Blue_View } from './admin/Blue_View'
-import { VisitorInfo } from '@fangcha/tools'
+import { I18nCode, VisitorInfo } from '@fangcha/tools'
 import { HomeView } from './admin/HomeView'
 import { DialogDemoView } from './admin/DialogDemoView'
 import { TableDemoView } from './table/TableDemoView'
@@ -95,6 +95,7 @@ const app = new AdminApp({
         Red: 1,
       },
       isAdmin: true,
+      locale: I18nCode.en,
     }
   },
 })

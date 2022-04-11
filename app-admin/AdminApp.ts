@@ -62,6 +62,7 @@ export class AdminApp extends BasicApp {
 
   public async reloadUserInfo() {
     this.visitorInfo = await this.config.reloadUserInfo!()
+    this.setLocale(this.visitorInfo.locale)
     return this.visitorInfo
   }
 
