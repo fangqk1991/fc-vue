@@ -30,11 +30,12 @@ interface DefaultSettings {
   sortDirection?: 'ascending' | 'descending'
 }
 
-export interface TableViewProtocol {
+export interface TableViewProtocol<T = any> {
   defaultSettings?: DefaultSettings | (() => DefaultSettings)
   reactiveQueryParams?: (retainQueryParams: DefaultSettings) => { [p: string]: any }
   onDataChanged?: (feeds: any[]) => void
-  loadData: (retainParams: Partial<RetainParams>) => Promise<PageData | PageResult>
+  loadData?: (retainParams: Partial<RetainParams>) => Promise<PageData | PageResult<T>>
+  loadOnePageItems?: (retainParams: Partial<RetainParams>) => Promise<T[]>
 }
 
 const trimParams = (params: {}) => {
@@ -229,8 +230,20 @@ export class MyTableView<T = any> extends ViewController {
     }
 
     this.isLoading = true
+    let loadData = this.delegate.loadData!
+    if (!loadData && this.delegate.loadOnePageItems) {
+      loadData = async (retainParams: Partial<RetainParams>) => {
+        const items = await this.delegate.loadOnePageItems!(retainParams)
+        return {
+          offset: 0,
+          length: items.length,
+          totalCount: items.length,
+          items: items,
+        }
+      }
+    }
     try {
-      const data = await this.delegate.loadData(this.forOldParams ? this._oldRetainParams() : this._retainParams())
+      const data = await loadData(this.forOldParams ? this._oldRetainParams() : this._retainParams())
       this.isLoading = false
       // TODO: 兼容方案
       if (data['elements']) {
