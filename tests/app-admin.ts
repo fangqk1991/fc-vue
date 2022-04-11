@@ -13,9 +13,7 @@ const app = new AdminApp({
   appName: 'Fangcha Admin',
   homeView: HomeView,
   useRemoteLocale: false,
-  gotoProfileView: () => {
-    console.info('gotoProfileView')
-  },
+  profileViewUrl: '/v1/profile',
   sidebarNodes: [
     {
       titleEn: 'Permission',
