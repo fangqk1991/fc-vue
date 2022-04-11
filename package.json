@@ -1,6 +1,6 @@
 {
   "name": "@fangcha/vue",
-  "version": "0.16.0",
+  "version": "0.16.1",
   "main": "src/index.ts",
   "scripts": {
     "start": "webpack-dev-server --config webpack.admin-dev.js",
@@ -14,7 +14,7 @@
   "author": "fang <me@fangqk.com>",
   "license": "MIT",
   "dependencies": {
-    "@fangcha/tools": "^1.16.0",
+    "@fangcha/tools": "^1.17.1",
     "element-ui": "^2.13.0",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.2",
