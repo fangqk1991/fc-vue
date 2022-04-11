@@ -12,9 +12,9 @@ import { BootstrapDemoView } from './admin/BootstrapDemoView'
 const app = new AdminApp({
   appName: 'Fangcha Admin',
   homeView: HomeView,
-  useRemoteLocale: true,
-  onClickLocaleLabel: () => {
-    console.info('onClickLocaleLabel')
+  useRemoteLocale: false,
+  gotoProfileView: () => {
+    console.info('gotoProfileView')
   },
   sidebarNodes: [
     {

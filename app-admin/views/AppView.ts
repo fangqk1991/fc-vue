@@ -24,10 +24,7 @@ import { I18nCode, I18nCodeDescriptor } from '@fangcha/tools'
           </div>
         </div>
         <div>
-          <a v-if="$app.config.useRemoteLocale" href="javascript:" @click="$app.config.onClickLocaleLabel" class="el-dropdown-link">
-            {{ locale() | describe_locale }}<i class="el-icon-setting el-icon--right"></i>
-          </a>
-          <el-dropdown v-else @command="changeLocale">
+          <el-dropdown v-if="!$app.config.useRemoteLocale" @command="changeLocale">
             <span class="el-dropdown-link"> {{ locale() | describe_locale }}<i class="el-icon-arrow-down el-icon--right"></i> </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item v-for="option in i18nCodeOptions" :key="option.value" :command="option.value">{{ option.label }}</el-dropdown-item>
@@ -36,10 +33,13 @@ import { I18nCode, I18nCodeDescriptor } from '@fangcha/tools'
           <el-dropdown class="ml-2">
             <span class="el-dropdown-link"> {{ $app.visitorInfo.email }}<i class="el-icon-arrow-down el-icon--right"></i> </span>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>
+              <link-dropdown-item @click="$app.config.gotoProfileView">
                 {{ $app.visitorInfo.name }}
                 <el-tag v-if="$app.visitorInfo.isAdmin" size="mini">管理员</el-tag>
-              </el-dropdown-item>
+              </link-dropdown-item>
+              <link-dropdown-item v-if="$app.config.useRemoteLocale" @click="$app.config.gotoProfileView">
+                {{ locale() | describe_locale }} <i class="el-icon-setting"></i>
+              </link-dropdown-item>
               <link-dropdown-item :link="$app.config.logoutUrl">{{ LS('Logout') }}</link-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>

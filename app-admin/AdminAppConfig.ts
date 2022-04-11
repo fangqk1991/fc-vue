@@ -16,7 +16,7 @@ export interface AdminAppConfig extends BasicAppConfig {
   plugins?: FrontendPluginProtocol[]
 
   useRemoteLocale?: boolean
-  onClickLocaleLabel?: () => void
+  gotoProfileView?: () => void
 
   sidebarNodes: MenuMainNode[]
   reloadUserInfo?: () => Promise<VisitorInfo>
