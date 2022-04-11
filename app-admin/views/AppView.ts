@@ -24,7 +24,10 @@ import { I18nCode, I18nCodeDescriptor } from '@fangcha/tools'
           </div>
         </div>
         <div>
-          <el-dropdown @command="changeLocale">
+          <a v-if="$app.config.useRemoteLocale" href="javascript:" @click="$app.config.onClickLocaleLabel" class="el-dropdown-link">
+            {{ locale() | describe_locale }}<i class="el-icon-setting el-icon--right"></i>
+          </a>
+          <el-dropdown v-else @command="changeLocale">
             <span class="el-dropdown-link"> {{ locale() | describe_locale }}<i class="el-icon-arrow-down el-icon--right"></i> </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item v-for="option in i18nCodeOptions" :key="option.value" :command="option.value">{{ option.label }}</el-dropdown-item>

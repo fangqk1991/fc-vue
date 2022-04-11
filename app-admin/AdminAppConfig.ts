@@ -15,6 +15,9 @@ export interface AdminAppConfig extends BasicAppConfig {
   homeView?: typeof Vue
   plugins?: FrontendPluginProtocol[]
 
+  useRemoteLocale?: boolean
+  onClickLocaleLabel?: () => void
+
   sidebarNodes: MenuMainNode[]
   reloadUserInfo?: () => Promise<VisitorInfo>
 
