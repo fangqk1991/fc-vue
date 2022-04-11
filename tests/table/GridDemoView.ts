@@ -1,7 +1,7 @@
 import { Component, MyTableView, TableViewProtocol, ViewController } from '../../src'
 import { DemoRecord, FakeServer } from './FakeServer'
 import DemoRecordDialog from './DemoRecordDialog'
-import { GridView } from '../../src/tables/GridView'
+import { GridView } from '../../src'
 
 @Component({
   components: {
