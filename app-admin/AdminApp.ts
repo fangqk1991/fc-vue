@@ -58,6 +58,7 @@ export class AdminApp extends BasicApp {
     options.logoutUrl = options.logoutUrl || '/api/v1/logout'
     options.mainLayout = AppView
     AxiosSettings.loginUrl = options.loginUrl
+    options.gotoProfileView = options.gotoProfileView || (() => {})
   }
 
   public async reloadUserInfo() {
