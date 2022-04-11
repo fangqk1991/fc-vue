@@ -7,6 +7,7 @@ import { i18n } from '../src/i18n'
 import { AxiosSettings } from '../basic'
 import { AppView } from './views/AppView'
 import { AdminAppConfig } from './AdminAppConfig'
+import 'bootstrap'
 
 export class AdminApp extends BasicApp {
   public config!: AdminAppConfig

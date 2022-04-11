@@ -7,6 +7,7 @@ import { DialogDemoView } from './admin/DialogDemoView'
 import { TableDemoView } from './table/TableDemoView'
 import '../fangcha/fc-styles.scss'
 import { GridDemoView } from './table/GridDemoView'
+import { BootstrapDemoView } from './admin/BootstrapDemoView'
 
 const app = new AdminApp({
   appName: 'Fangcha Admin',
@@ -49,6 +50,11 @@ const app = new AdminApp({
           titleZh: 'GridView Demo',
           path: '/v1/grid-view-demo',
         },
+        {
+          titleEn: 'Bootstrap Demo',
+          titleZh: 'Bootstrap Demo',
+          path: '/v1/bootstrap-demo',
+        },
       ],
     },
   ],
@@ -74,6 +80,10 @@ const app = new AdminApp({
     {
       path: '/v1/grid-view-demo',
       component: GridDemoView,
+    },
+    {
+      path: '/v1/bootstrap-demo',
+      component: BootstrapDemoView,
     },
   ],
   reloadUserInfo: async (): Promise<VisitorInfo> => {
