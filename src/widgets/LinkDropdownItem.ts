@@ -23,7 +23,7 @@ export class LinkDropdownItem extends ViewController {
   @Prop({ default: '', type: String }) readonly iconUrl!: string
   @Prop({ default: '', type: String }) readonly customClass!: string
 
-  isLinkExternal() {
+  get isLinkExternal() {
     return typeof this.link === 'string' && this.link.startsWith('http')
   }
 }
