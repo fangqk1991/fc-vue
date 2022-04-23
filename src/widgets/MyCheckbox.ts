@@ -3,7 +3,9 @@ import { ViewController } from '../ViewController'
 
 @Component({
   template: `
-    <el-checkbox v-model="myValue" :disabled="!!disabled" @change="onSwitchChange" />
+    <el-checkbox v-model="myValue" :disabled="!!disabled" @change="onSwitchChange">
+      <slot />
+    </el-checkbox>
   `,
 })
 export class MyCheckbox extends ViewController {

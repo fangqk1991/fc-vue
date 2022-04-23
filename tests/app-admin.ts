@@ -8,6 +8,7 @@ import { TableDemoView } from './table/TableDemoView'
 import '../fangcha/fc-styles.scss'
 import { GridDemoView } from './table/GridDemoView'
 import { BootstrapDemoView } from './admin/BootstrapDemoView'
+import { WidgetsDemoView } from './admin/WidgetsDemoView'
 
 const app = new AdminApp({
   appName: 'Fangcha Admin',
@@ -53,6 +54,11 @@ const app = new AdminApp({
           path: '/v1/grid-view-demo',
         },
         {
+          titleEn: 'Widgets Demo',
+          titleZh: 'Widgets Demo',
+          path: '/v1/widgets-demo',
+        },
+        {
           titleEn: 'Bootstrap Demo',
           titleZh: 'Bootstrap Demo',
           path: '/v1/bootstrap-demo',
@@ -82,6 +88,10 @@ const app = new AdminApp({
     {
       path: '/v1/grid-view-demo',
       component: GridDemoView,
+    },
+    {
+      path: '/v1/widgets-demo',
+      component: WidgetsDemoView,
     },
     {
       path: '/v1/bootstrap-demo',
