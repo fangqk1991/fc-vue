@@ -55,13 +55,27 @@ export class AppMenu extends ViewController {
   }
 
   getMenuVisibleLinks(menu: MenuMainNode) {
-    return menu.links.filter(
-      (link) => link.visibleLevel !== VisibleLevel.Private || this.$app.checkPathAccessible(link.path!)
-    )
+    return menu.links.filter((link) => {
+      if (link.visible !== undefined) {
+        if (typeof link.visible === 'function') {
+          return !!link.visible()
+        }
+        return link.visible
+      }
+      return link.visibleLevel !== VisibleLevel.Private || this.$app.checkPathAccessible(link.path!)
+    })
   }
 
   get menus() {
-    return this.sidebarOptions.filter((menu) => this.getMenuVisibleLinks(menu).length > 0)
+    return this.sidebarOptions.filter((menu) => {
+      if (menu.visible !== undefined) {
+        if (typeof menu.visible === 'function') {
+          return !!menu.visible()
+        }
+        return menu.visible
+      }
+      return this.getMenuVisibleLinks(menu).length > 0
+    })
   }
 
   reloadSidebar() {

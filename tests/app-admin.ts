@@ -55,6 +55,19 @@ const app = new AdminApp({
       ],
     },
     {
+      titleEn: 'Permission 3',
+      titleZh: 'Permission 3',
+      icon: 'el-icon-user',
+      visible: () => false,
+      links: [
+        {
+          titleEn: 'Green',
+          titleZh: 'Green',
+          path: '/v1/page-green',
+        },
+      ],
+    },
+    {
       titleEn: 'Components',
       titleZh: 'Components',
       icon: 'el-icon-menu',

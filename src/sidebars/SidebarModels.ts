@@ -10,6 +10,7 @@ export interface MenuMainNode {
   titleZh: string
   icon: string
   links: MenuSubNode[]
+  visible?: boolean | (() => boolean)
 }
 
 export interface MenuSubNode {
@@ -19,5 +20,5 @@ export interface MenuSubNode {
   isHyperlink?: boolean
   url?: string
   visibleLevel?: VisibleLevel
-  // isDisabled?: () => boolean
+  visible?: boolean | (() => boolean)
 }
