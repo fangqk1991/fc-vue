@@ -1,3 +1,9 @@
+export enum VisibleLevel {
+  Public = 'Public',
+  Protected = 'Protected',
+  Private = 'Private',
+}
+
 export interface MenuMainNode {
   uid?: string
   titleEn: string
@@ -12,4 +18,6 @@ export interface MenuSubNode {
   path?: string
   isHyperlink?: boolean
   url?: string
+  visibleLevel?: VisibleLevel
+  // isDisabled?: () => boolean
 }

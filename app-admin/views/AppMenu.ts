@@ -1,11 +1,11 @@
-import { Component, MenuMainNode, Prop, ViewController } from '../../src'
+import { Component, MenuMainNode, Prop, ViewController, VisibleLevel } from '../../src'
 import { NotificationCenter } from 'notification-center-js'
 
 @Component({
   template: `
     <el-menu :default-active="$route.path" :default-openeds="defaultOpeneds" :collapse="collapse" :unique-opened="uniqueOpened">
       <el-submenu
-        v-for="menu in sidebarOptions"
+        v-for="menu in menus"
         :key="menu.titleZh"
         :index="menu.titleZh"
         popper-class="sidebar-popper"
@@ -15,7 +15,7 @@ import { NotificationCenter } from 'notification-center-js'
           <span slot="title">{{ $i18n.locale === 'zh' ? menu.titleZh : menu.titleEn }}</span>
         </template>
         <el-menu-item
-          v-for="link in menu.links"
+          v-for="link in getMenuVisibleLinks(menu)"
           :key="link.path ? link.path : link.url"
           :index="link.path ? link.path : link.url"
           :disabled="!$app.checkPathAccessible(link.path)"
@@ -52,6 +52,16 @@ export class AppMenu extends ViewController {
     NotificationCenter.defaultCenter().addObserver('__onSidebarOptionsChanged', () => {
       this.reloadSidebar()
     })
+  }
+
+  getMenuVisibleLinks(menu: MenuMainNode) {
+    return menu.links.filter(
+      (link) => link.visibleLevel !== VisibleLevel.Private || this.$app.checkPathAccessible(link.path!)
+    )
+  }
+
+  get menus() {
+    return this.sidebarOptions.filter((menu) => this.getMenuVisibleLinks(menu).length > 0)
   }
 
   reloadSidebar() {

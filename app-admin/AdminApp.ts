@@ -81,10 +81,6 @@ export class AdminApp extends BasicApp {
     return this.config.sidebarNodes
   }
 
-  public checkRouteAccessible(route: RouteConfig) {
-    return this.checkPathAccessible(route.path)
-  }
-
   public checkPathAccessible(path: string) {
     const permissionKey = this.getPathPermissionKey(path)
     return !permissionKey || !!this.visitorInfo.permissionKeyMap[permissionKey]
