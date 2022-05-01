@@ -125,9 +125,9 @@ export class DataImportPanel<T> extends ViewController {
         await this.delegate.submitData(todoItem)
         this.pickedItems[i]['succ'] = 1
         this.$set(this.pickedItems, i, this.pickedItems[i])
-      } catch (e: any) {
+      } catch (e) {
         this.pickedItems[i]['failed'] = 1
-        this.pickedItems[i]['errorMessage'] = e.response?.data
+        this.pickedItems[i]['errorMessage'] = (e as any).response?.data
         this.$set(this.pickedItems, i, this.pickedItems[i])
       }
     }
