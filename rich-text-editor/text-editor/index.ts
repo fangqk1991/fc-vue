@@ -1,3 +1,3 @@
-import TextEditor from './TextEditor.vue'
+const TextEditor = require('./TextEditor.vue').default
 
 export { TextEditor }
