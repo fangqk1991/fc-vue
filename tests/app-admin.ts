@@ -11,6 +11,7 @@ import { BootstrapDemoView } from './admin/BootstrapDemoView'
 import { WidgetsDemoView } from './admin/WidgetsDemoView'
 import { Green_View } from './admin/Green_View'
 import { VisibleLevel } from '../src/sidebars'
+import { TextEditorDemoView } from './admin/TextEditorDemoView'
 
 const app = new AdminApp({
   appName: 'Fangcha Admin',
@@ -97,6 +98,11 @@ const app = new AdminApp({
           titleZh: 'Bootstrap Demo',
           path: '/v1/bootstrap-demo',
         },
+        {
+          titleEn: 'TextEditor Demo',
+          titleZh: 'TextEditor Demo',
+          path: '/v1/text-editor-demo',
+        },
       ],
     },
   ],
@@ -135,6 +141,10 @@ const app = new AdminApp({
     {
       path: '/v1/bootstrap-demo',
       component: BootstrapDemoView,
+    },
+    {
+      path: '/v1/text-editor-demo',
+      component: TextEditorDemoView,
     },
   ],
   reloadUserInfo: async (): Promise<VisitorInfo> => {

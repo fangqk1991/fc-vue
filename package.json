@@ -1,6 +1,6 @@
 {
   "name": "@fangcha/vue",
-  "version": "0.22.2",
+  "version": "0.23.0",
   "main": "src/index.ts",
   "scripts": {
     "start": "webpack-dev-server --config webpack.admin-dev.js",
@@ -26,7 +26,8 @@
     "cookie-browser": "^1.0.0",
     "notification-center-js": "^0.2.0",
     "bootstrap": "^5.1.3",
-    "@popperjs/core": "^2.11.5"
+    "@popperjs/core": "^2.11.5",
+    "quill": "^1.3.7"
   },
   "devDependencies": {
     "@fangcha/webpack": "^0.4.0",
@@ -58,6 +59,7 @@
     "basic/*",
     "bootstrap/*",
     "oss-service/*",
+    "rich-text-editor/*",
     "fangcha/*"
   ],
   "nyc": {
