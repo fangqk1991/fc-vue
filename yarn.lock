@@ -1073,6 +1073,17 @@
     eslint-plugin-vue "^6.1.2"
     prettier "^2.5.1"
 
+"@fangcha/event-stat@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@fangcha/event-stat/-/event-stat-0.3.0.tgz#667e81c88896809b8bce2882cb898f8d65e4a7c6"
+  integrity sha512-fytQVgUA3ee3FFHUUAbUhpPRqfQndCcAQQqJQwA7DHzD1ebkhWRVnNJajjSvJmghhZ7aIFteJCk7qPwYG2yq1w==
+  dependencies:
+    "@fangcha/tools" "^1.18.0"
+    fc-feed "^0.16.0"
+    fc-model "^0.4.2"
+    fc-sql "^0.28.0"
+    tslib "^2.4.0"
+
 "@fangcha/logger@^0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@fangcha/logger/-/logger-0.2.0.tgz#cc52bdf69d2fc2f58adf6eb4d93b3342710c346d"
