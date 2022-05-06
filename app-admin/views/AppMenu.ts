@@ -1,5 +1,6 @@
-import { Component, MenuMainNode, Prop, ViewController, VisibleLevel } from '../../src'
+import { Component, MenuMainNode, MenuSubNode, Prop, ViewController, VisibleLevel } from '../../src'
 import { NotificationCenter } from 'notification-center-js'
+import { makeUUID } from '@fangcha/tools'
 
 @Component({
   template: `
@@ -16,8 +17,8 @@ import { NotificationCenter } from 'notification-center-js'
         </template>
         <el-menu-item
           v-for="link in getMenuVisibleLinks(menu)"
-          :key="link.path ? link.path : link.url"
-          :index="link.path ? link.path : link.url"
+          :key="uniqueKeyForLink(link)"
+          :index="uniqueKeyForLink(link)"
           :disabled="!$app.checkPathAccessible(link.path)"
         >
           <a v-if="link.onClick" href="javascript:" @click="link.onClick">
@@ -49,6 +50,16 @@ export class AppMenu extends ViewController {
 
   sidebarOptions: MenuMainNode[] = []
   defaultOpeneds: string[] = []
+
+  uniqueKeyForLink(link: MenuSubNode) {
+    if (link.path) {
+      return link.path
+    }
+    if (link.url) {
+      return link.url
+    }
+    return makeUUID()
+  }
 
   viewDidLoad() {
     this.reloadSidebar()
