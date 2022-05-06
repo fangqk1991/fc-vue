@@ -20,7 +20,13 @@ import { NotificationCenter } from 'notification-center-js'
           :index="link.path ? link.path : link.url"
           :disabled="!$app.checkPathAccessible(link.path)"
         >
-          <a v-if="link.isHyperlink" :href="link.url" target="_blank">
+          <a v-if="link.onClick" href="javascript:" @click="link.onClick">
+            <div style="display: inline-block; width: 100%">
+              <span style="margin-right: 8px">▪</span>
+              <span>{{ $i18n.locale === 'zh' ? link.titleZh : link.titleEn }}</span>
+            </div>
+          </a>
+          <a v-else-if="link.isHyperlink" :href="link.url" target="_blank">
             <div style="display: inline-block; width: 100%">
               <span style="margin-right: 8px">▪</span>
               <span>{{ $i18n.locale === 'zh' ? link.titleZh : link.titleEn }}</span>

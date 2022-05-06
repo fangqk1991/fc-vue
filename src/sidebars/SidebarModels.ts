@@ -19,6 +19,7 @@ export interface MenuSubNode {
   path?: string
   isHyperlink?: boolean
   url?: string
+  onClick?: () => void | Promise<void>
   visibleLevel?: VisibleLevel
   visible?: boolean | (() => boolean)
 }

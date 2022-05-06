@@ -1,7 +1,7 @@
 import { AdminApp } from '../app-admin'
 import { Red_View } from './admin/Red_View'
 import { Blue_View } from './admin/Blue_View'
-import { I18nCode, VisitorInfo } from '@fangcha/tools'
+import { I18nCode, sleep, VisitorInfo } from '@fangcha/tools'
 import { HomeView } from './admin/HomeView'
 import { DialogDemoView } from './admin/DialogDemoView'
 import { TableDemoView } from './table/TableDemoView'
@@ -12,6 +12,7 @@ import { WidgetsDemoView } from './admin/WidgetsDemoView'
 import { Green_View } from './admin/Green_View'
 import { VisibleLevel } from '../src/sidebars'
 import { TextEditorDemoView } from './admin/TextEditorDemoView'
+import { LoadingView } from '../src/loading'
 
 const app = new AdminApp({
   appName: 'Fangcha Admin',
@@ -28,6 +29,15 @@ const app = new AdminApp({
           titleEn: 'Red',
           titleZh: 'Red',
           path: '/v1/page-red',
+        },
+        {
+          titleEn: 'onClick',
+          titleZh: 'onClick',
+          onClick: () => {
+            LoadingView.loadHandler('Loading..........', async () => {
+              await sleep(2000)
+            })
+          },
         },
         {
           titleEn: 'Green',
