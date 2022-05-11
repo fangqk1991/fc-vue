@@ -182,7 +182,12 @@ export class MyTableView<T = any> extends ViewController {
         }
       }
     }
-
+    const defaultSettings = this.getDefaultSettings()
+    for (const key of ['pageNumber', 'pageSize', 'sortKey', 'sortDirection']) {
+      if (queryParams[key] === `${defaultSettings[key]}`) {
+        delete queryParams[key]
+      }
+    }
     if (!DiffMapper.checkEquals(this.$route.query, queryParams)) {
       this.$router.replace({
         path: this.$route.path,
@@ -269,21 +274,35 @@ export class MyTableView<T = any> extends ViewController {
     this.reloadData({ updateQuery: true })
   }
 
-  makeBasicSettings(useQuery = false) {
-    if (!this.reactiveQuery) {
-      useQuery = false
-    }
+  getDefaultSettings() {
     let defaultSettings: DefaultSettings = {}
     if (typeof this.delegate.defaultSettings === 'function') {
       defaultSettings = this.delegate.defaultSettings()
     } else if (this.delegate.defaultSettings) {
       defaultSettings = this.delegate.defaultSettings
     }
+    defaultSettings.pageNumber = defaultSettings.pageNumber || 1
+    defaultSettings.pageSize = defaultSettings.pageSize || 10
+    defaultSettings.sortKey = defaultSettings.sortKey || ''
+    defaultSettings.sortDirection = defaultSettings.sortDirection || 'descending'
+    return defaultSettings as {
+      pageNumber: number
+      pageSize: number
+      sortKey: string
+      sortDirection: 'ascending' | 'descending'
+    }
+  }
+
+  makeBasicSettings(useQuery = false) {
+    if (!this.reactiveQuery) {
+      useQuery = false
+    }
+    const defaultSettings = this.getDefaultSettings()
     const query = useQuery ? this.$route.query : {}
-    this.pageInfo.pageNumber = Number(query[this.getTargetKey('pageNumber')]) || defaultSettings.pageNumber || 1
-    this.pageInfo.pageSize = Number(query[this.getTargetKey('pageSize')]) || defaultSettings.pageSize || 10
-    this.orderRule.prop = (query[this.getTargetKey('sortKey')] || defaultSettings.sortKey || '') as string
-    const sortType = query[this.getTargetKey('sortDirection')] || defaultSettings.sortDirection || 'descending'
+    this.pageInfo.pageNumber = Number(query[this.getTargetKey('pageNumber')]) || defaultSettings.pageNumber
+    this.pageInfo.pageSize = Number(query[this.getTargetKey('pageSize')]) || defaultSettings.pageSize
+    this.orderRule.prop = (query[this.getTargetKey('sortKey')] || defaultSettings.sortKey) as string
+    const sortType = query[this.getTargetKey('sortDirection')] || defaultSettings.sortDirection
     this.orderRule.order = sortType as any
   }
 
