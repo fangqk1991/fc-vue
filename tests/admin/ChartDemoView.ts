@@ -1,15 +1,23 @@
 import { Component, ViewController } from '../../src'
-import { FcChart } from '../../echarts/FcChart'
+import { MyPieChart } from '../../echarts/MyPieChart'
+import { MyLineChart } from '../../echarts/MyLineChart'
 
 @Component({
   components: {
-    'fc-chart': FcChart,
+    'my-pie-chart': MyPieChart,
+    'my-line-chart': MyLineChart,
   },
   template: `
     <div>
-      <el-card>
-        <fc-chart />
-      </el-card>
+      <h4>Charts</h4>
+      <el-tabs type="card" class="mt-4" value="line-chart">
+        <el-tab-pane label="Pie Chart" name="pie-chart">
+          <my-pie-chart />
+        </el-tab-pane>
+        <el-tab-pane label="Line Chart" name="line-chart">
+          <my-line-chart />
+        </el-tab-pane>
+      </el-tabs>
     </div>
   `,
 })

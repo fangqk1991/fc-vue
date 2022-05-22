@@ -5,17 +5,21 @@ import { CanvasRenderer } from 'echarts/renderers'
 import { PieChart } from 'echarts/charts'
 import { LegendComponent, TitleComponent, TooltipComponent } from 'echarts/components'
 import VChart from 'vue-echarts'
+import { EChartsOption } from 'echarts'
 
 use([CanvasRenderer, PieChart, TitleComponent, TooltipComponent, LegendComponent])
 
+/**
+ * @description https://github.com/ecomfe/vue-echarts
+ */
 @Component({
   components: {
     'v-chart': VChart,
   },
-  template: `<v-chart :option="options" style="height: 800px;"></v-chart>`,
+  template: `<v-chart :option="options" style="height: 600px;" :autoresize="true"></v-chart>`,
 })
-export class FcChart extends ViewController {
-  options = {
+export class MyPieChart extends ViewController {
+  options: EChartsOption = {
     title: {
       text: 'Traffic Sources',
       left: 'center',
