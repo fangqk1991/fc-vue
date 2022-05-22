@@ -13,6 +13,7 @@ import { Green_View } from './admin/Green_View'
 import { VisibleLevel } from '../src/sidebars'
 import { TextEditorDemoView } from './admin/TextEditorDemoView'
 import { LoadingView } from '../src/loading'
+import { ChartDemoView } from './admin/ChartDemoView'
 
 const app = new AdminApp({
   appName: 'Fangcha Admin',
@@ -113,6 +114,11 @@ const app = new AdminApp({
           titleZh: 'TextEditor Demo',
           path: '/v1/text-editor-demo',
         },
+        {
+          titleEn: 'Chart Demo',
+          titleZh: 'Chart Demo',
+          path: '/v1/chart-demo',
+        },
       ],
     },
   ],
@@ -155,6 +161,10 @@ const app = new AdminApp({
     {
       path: '/v1/text-editor-demo',
       component: TextEditorDemoView,
+    },
+    {
+      path: '/v1/chart-demo',
+      component: ChartDemoView,
     },
   ],
   reloadUserInfo: async (): Promise<VisitorInfo> => {
