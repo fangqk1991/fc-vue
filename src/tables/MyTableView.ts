@@ -159,7 +159,7 @@ export class MyTableView<T = any> extends ViewController {
     const params = this.delegate.reactiveQueryParams
       ? this.delegate.reactiveQueryParams(retainQueryParams)
       : retainQueryParams
-    let queryParams = Object.assign({}, this.$route.query)
+    let queryParams = Object.assign({}, this.$route?.query || {})
 
     Object.keys(params).forEach((key) => {
       if (params[key] !== undefined || params[key] !== null) {
@@ -188,7 +188,7 @@ export class MyTableView<T = any> extends ViewController {
         delete queryParams[key]
       }
     }
-    if (!DiffMapper.checkEquals(this.$route.query, queryParams)) {
+    if (this.$route && !DiffMapper.checkEquals(this.$route.query, queryParams)) {
       this.$router.replace({
         path: this.$route.path,
         query: queryParams,
@@ -294,7 +294,7 @@ export class MyTableView<T = any> extends ViewController {
   }
 
   makeBasicSettings(useQuery = false) {
-    if (!this.reactiveQuery) {
+    if (!this.reactiveQuery || !this.$route) {
       useQuery = false
     }
     const defaultSettings = this.getDefaultSettings()
