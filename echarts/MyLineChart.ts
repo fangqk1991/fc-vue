@@ -77,7 +77,6 @@ export class MyLineChart extends ViewController {
         return {
           name: item.name,
           type: 'line',
-          stack: 'Total',
           smooth: true,
           data: xAxisValues.map((xVal) => item.data[xVal]),
         }
