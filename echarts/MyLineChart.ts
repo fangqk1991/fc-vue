@@ -3,9 +3,9 @@ import { ViewController } from '../src/ViewController'
 import { use } from 'echarts/core'
 import { CanvasRenderer } from 'echarts/renderers'
 import { GridComponent, LegendComponent, TitleComponent, ToolboxComponent, TooltipComponent } from 'echarts/components'
-import VChart from 'vue-echarts'
 import { LineChart } from 'echarts/charts'
 import { EChartsOption } from 'echarts'
+const VChart = require('vue-echarts').default
 
 use([CanvasRenderer, GridComponent, TitleComponent, TooltipComponent, ToolboxComponent, LegendComponent, LineChart])
 
