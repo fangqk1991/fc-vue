@@ -69,6 +69,15 @@ export class MyLineChart extends ViewController {
         axisLabel: {
           formatter: this.data.xAxisLabelFormat,
         },
+        axisPointer: {
+          label: {
+            formatter: this.data.xAxisLabelFormat
+              ? (params) => {
+                  return this.data.xAxisLabelFormat!(params.value as any)
+                }
+              : undefined,
+          },
+        },
       },
       yAxis: {
         type: 'value',
