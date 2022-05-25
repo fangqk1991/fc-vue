@@ -38,13 +38,13 @@ export class ViewController extends Vue {
       }
     })
 
-    this.$router.replace({
+    return this.$router.replace({
       name: this.$route.name!,
       query: queryParams,
     })
   }
 
   $goto(location: RawLocation) {
-    this.$router.push(location)
+    return this.$router.push(location)
   }
 }
