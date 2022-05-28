@@ -1108,19 +1108,19 @@
     shelljs "^0.8.5"
     tslib "^2.4.0"
 
-"@fangcha/tools@^1.17.1":
-  version "1.17.1"
-  resolved "https://registry.yarnpkg.com/@fangcha/tools/-/tools-1.17.1.tgz#29235a04338efe1ed30b531a604f9eddef5e8dfc"
-  integrity sha512-VyZ9M/LcnmTCO36cvGW9GLIoLsY+4whi3mSRE6/CnANqGFtAtOeZO95Rxvr5rgTgfBYQnZVM7d0izTBJ/zelRA==
+"@fangcha/tools@^1.18.0":
+  version "1.18.0"
+  resolved "https://registry.yarnpkg.com/@fangcha/tools/-/tools-1.18.0.tgz#6db5a92c25116698c183cc9e06b94848b46209e8"
+  integrity sha512-1s1WeQUFMMqb9L/7oz9eppCA97cWjw8+RBp5hFw9Sln0iL+VxoUxG7bGGr3eAQ4/zcwwYuoIlig/VvMdcsdX5w==
   dependencies:
     moment "^2.29.1"
     tslib "^2.3.1"
     uuid "^3.3.3"
 
-"@fangcha/tools@^1.18.0":
-  version "1.18.0"
-  resolved "https://registry.yarnpkg.com/@fangcha/tools/-/tools-1.18.0.tgz#6db5a92c25116698c183cc9e06b94848b46209e8"
-  integrity sha512-1s1WeQUFMMqb9L/7oz9eppCA97cWjw8+RBp5hFw9Sln0iL+VxoUxG7bGGr3eAQ4/zcwwYuoIlig/VvMdcsdX5w==
+"@fangcha/tools@^1.19.0":
+  version "1.19.0"
+  resolved "https://registry.yarnpkg.com/@fangcha/tools/-/tools-1.19.0.tgz#67c465d4b6d11fac1687b94dccd29cb58a20ed0a"
+  integrity sha512-98GKijDG08kuK1E91jdRimSNvF8cgdXAbu71PykLZGupjnBkju3K+sTSjgrt6bmOtcIVy8OifCSYAguQgH4JVQ==
   dependencies:
     moment "^2.29.1"
     tslib "^2.3.1"
