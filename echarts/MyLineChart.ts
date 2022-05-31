@@ -3,11 +3,20 @@ import { ViewController } from '../src/ViewController'
 import { use } from 'echarts/core'
 import { CanvasRenderer } from 'echarts/renderers'
 import { GridComponent, LegendComponent, TitleComponent, ToolboxComponent, TooltipComponent } from 'echarts/components'
-import { LineChart } from 'echarts/charts'
+import { BarChart, LineChart } from 'echarts/charts'
 import { EChartsOption } from 'echarts'
 const VChart = require('vue-echarts').default
 
-use([CanvasRenderer, GridComponent, TitleComponent, TooltipComponent, ToolboxComponent, LegendComponent, LineChart])
+use([
+  CanvasRenderer,
+  GridComponent,
+  TitleComponent,
+  TooltipComponent,
+  ToolboxComponent,
+  LegendComponent,
+  LineChart,
+  BarChart,
+])
 
 export interface LineChartLegend {
   name: string
@@ -33,6 +42,8 @@ export interface LineChartData {
 export class MyLineChart extends ViewController {
   @Prop({ default: '600px', type: String }) readonly height!: string
   @Prop({ default: null, type: Object }) readonly data!: LineChartData
+
+  seriesType: string = 'line'
 
   get options(): EChartsOption {
     const legends = this.data.legends
@@ -85,7 +96,7 @@ export class MyLineChart extends ViewController {
       series: legends.map((item) => {
         return {
           name: item.name,
-          type: 'line',
+          type: this.seriesType as any,
           smooth: true,
           data: xAxisValues.map((xVal) => item.data[xVal]),
         }

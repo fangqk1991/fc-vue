@@ -1,21 +1,26 @@
 import { Component, ViewController } from '../../src'
 import { MyPieChart } from '../../echarts/MyPieChart'
-import { LineChartData, MyLineChart } from '../../echarts/MyLineChart'
+import { LineChartData, MyBarChart, MyLineChart } from '../../echarts'
 
 @Component({
   components: {
     'my-pie-chart': MyPieChart,
     'my-line-chart': MyLineChart,
+    'my-bar-chart': MyBarChart,
   },
   template: `
     <div>
       <h4>Charts</h4>
-      <el-tabs type="card" class="mt-4" value="line-chart">
+      <el-tabs type="card" class="mt-4" value="bar-chart">
         <el-tab-pane label="Pie Chart" name="pie-chart">
           <my-pie-chart />
         </el-tab-pane>
         <el-tab-pane label="Line Chart" name="line-chart">
           <my-line-chart :data="lineChartData" height="700px" />
+          <el-button size="mini" @click="onRandom()">Random</el-button>
+        </el-tab-pane>
+        <el-tab-pane label="Bar Chart" name="bar-chart">
+          <my-bar-chart :data="lineChartData" height="700px" />
           <el-button size="mini" @click="onRandom()">Random</el-button>
         </el-tab-pane>
       </el-tabs>
@@ -24,7 +29,7 @@ import { LineChartData, MyLineChart } from '../../echarts/MyLineChart'
 })
 export class ChartDemoView extends ViewController {
   lineChartData: LineChartData = {
-    title: 'Stacked Line',
+    title: 'Some items',
     xAxisValues: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
     xAxisLabelFormat: (val) => {
       return `#${val}#`
