@@ -21,6 +21,9 @@ use([
 export interface LineChartLegend {
   name: string
   data: {}
+  lineStyle?: {
+    type: 'solid' | 'dashed' | 'dotted'
+  }
 }
 
 export interface LineChartData {
@@ -99,6 +102,9 @@ export class MyLineChart extends ViewController {
           type: this.seriesType as any,
           smooth: true,
           data: xAxisValues.map((xVal) => item.data[xVal]),
+          lineStyle: {
+            ...(item.lineStyle || {}),
+          },
         }
       }),
     }

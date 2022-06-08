@@ -94,6 +94,9 @@ export class ChartDemoView extends ViewController {
           Sat: 1330,
           Sun: 1320,
         },
+        lineStyle: {
+          type: 'dashed',
+        },
       },
     ],
   }
