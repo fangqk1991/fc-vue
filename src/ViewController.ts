@@ -15,7 +15,13 @@ export class ViewController extends Vue {
     this.viewDidLoad()
   }
 
+  beforeDestroy() {
+    this.viewWillUnload()
+  }
+
   viewDidLoad() {}
+
+  viewWillUnload() {}
 
   async execHandler<T = any>(handler: () => Promise<T>) {
     this.isLoading = true
