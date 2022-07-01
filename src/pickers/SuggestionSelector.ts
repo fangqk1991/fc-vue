@@ -59,6 +59,7 @@ export class SuggestionSelector<T = any> extends ViewController {
 
   handleSelect() {
     this.$emit('update:value', this.myValue)
-    this.$emit('change', this.myValue)
+    const item = this.items.find((item) => item[this.protocol.valueKey as any] === this.myValue) || null
+    this.$emit('change', this.myValue, item)
   }
 }
