@@ -13,6 +13,7 @@ import { ViewController } from '../ViewController'
       :remote-method="reloadItems"
       :loading="isLoading"
       :disabled="disabled"
+      :size="size"
       @change="handleSelect"
     >
       <el-option 
@@ -29,6 +30,7 @@ export class SuggestionSelector<T = any> extends ViewController {
     throw new Error(`SuggestionProtocol Error`)
   }
 
+  @Prop({ default: 'mini', type: String }) readonly size!: string
   @Prop({ default: false, type: Boolean }) readonly disabled!: boolean
 
   @Model('update:value', { default: null }) readonly value!: string
