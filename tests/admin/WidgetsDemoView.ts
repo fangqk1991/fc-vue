@@ -20,12 +20,67 @@ import { JsonTreeView } from '../../json'
 export class WidgetsDemoView extends ViewController {
   checkboxValue = 1
   jsonData = {
-    a: 1,
-    b: 2,
-    c: {
-      c1: 'Value 1',
-      c2: 'Value 2',
-      c4: ['A', 'B', 'C', 'D', 'E']
-    }
+    symbol: 'oneByOne',
+    elements: [
+      {
+        name: '阶段 1',
+        symbol: 'anyOf',
+        elements: [
+          {
+            auditor: '{{__leader__}}',
+          },
+          {
+            auditor: 'B',
+          },
+          {
+            symbol: 'oneByOne',
+            elements: [
+              {
+                name: '阶段 1',
+                symbol: 'anyOf',
+                elements: [
+                  {
+                    auditor: '22222222',
+                  },
+                  {
+                    auditor: 'B',
+                  },
+                ],
+              },
+              {
+                name: '阶段 2',
+                auditor: 'C',
+              },
+              {
+                name: '阶段 3',
+                symbol: 'oneByOne',
+                elements: [
+                  {
+                    name: '阶段 1',
+                    symbol: 'anyOf',
+                    elements: [
+                      {
+                        auditor: '{{__leader__}}',
+                      },
+                      {
+                        auditor: 'B',
+                      },
+                    ],
+                  },
+                  {
+                    name: '阶段 22',
+                    auditor: '{{.leader}}',
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        name: '阶段 22',
+        auditor: '{{.leader}}',
+      },
+    ],
   }
 }

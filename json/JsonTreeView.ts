@@ -12,7 +12,7 @@ interface CommonNode {
 @Component({
   template: `
     <div>
-      <small>点击节点可编辑对应数据</small>
+      <small v-if="!readonly">点击节点可编辑对应数据</small>
       <el-tree
         v-if="rootNode"
         :data="[rootNode]"
@@ -35,6 +35,7 @@ interface CommonNode {
 })
 export class JsonTreeView extends ViewController {
   @Prop({ default: null, type: Object }) readonly data!: {}
+  @Prop({ default: false, type: Boolean }) readonly readonly!: boolean
 
   rootNode: CommonNode | null = null
   defaultProps = {
@@ -83,6 +84,9 @@ export class JsonTreeView extends ViewController {
   }
 
   onEditNode(commonNode: CommonNode) {
+    if (this.readonly) {
+      return
+    }
     const keychain = commonNode.keychain
     if (commonNode.val && typeof commonNode.val === 'object') {
       const dialog = JsonEditorDialog.dialogForEdit(commonNode.val)
@@ -92,6 +96,7 @@ export class JsonTreeView extends ViewController {
           for (let i = 0; i < keychain.length - 1; ++i) {
             curData = curData[keychain[i]]
           }
+          curData[commonNode.curKey] = newVal
         } else {
           Object.keys(curData).forEach((key) => {
             delete curData[key]
@@ -99,6 +104,7 @@ export class JsonTreeView extends ViewController {
           Object.assign(curData, newVal)
         }
         this.reloadRootNode()
+        this.$emit('change', this.data)
       })
     }
   }
