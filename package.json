@@ -1,6 +1,6 @@
 {
   "name": "@fangcha/vue",
-  "version": "0.33.0",
+  "version": "0.34.0",
   "main": "src/index.ts",
   "scripts": {
     "start": "webpack-dev-server --config webpack.admin-dev.js",
@@ -66,7 +66,8 @@
     "echarts/*",
     "oss-service/*",
     "rich-text-editor/*",
-    "fangcha/*"
+    "fangcha/*",
+    "json/*"
   ],
   "nyc": {
     "sourceMap": false
