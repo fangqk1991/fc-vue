@@ -6,6 +6,7 @@ interface CommonNode {
   curKey: string
   keychain: string[]
   val: {} | string | number | undefined
+  parent?: CommonNode
   children?: CommonNode[]
 }
 
@@ -68,6 +69,7 @@ export class JsonTreeView extends ViewController {
           return {
             curKey: key,
             isLeaf: isLeaf,
+            parent: node,
             keychain: [...node.keychain, key],
             val: subVal,
           }
@@ -87,25 +89,28 @@ export class JsonTreeView extends ViewController {
     if (this.readonly) {
       return
     }
-    const keychain = commonNode.keychain
-    if (commonNode.val && typeof commonNode.val === 'object') {
-      const dialog = JsonEditorDialog.dialogForEdit(commonNode.val)
-      dialog.show((newVal) => {
-        let curData = this.data
-        if (keychain.length > 0) {
-          for (let i = 0; i < keychain.length - 1; ++i) {
-            curData = curData[keychain[i]]
-          }
-          curData[commonNode.curKey] = newVal
-        } else {
-          Object.keys(curData).forEach((key) => {
-            delete curData[key]
-          })
-          Object.assign(curData, newVal)
-        }
-        this.reloadRootNode()
-        this.$emit('change', this.data)
-      })
+
+    if (!(commonNode.val && typeof commonNode.val === 'object')) {
+      commonNode = commonNode.parent!
     }
+
+    const keychain = commonNode.keychain
+    const dialog = JsonEditorDialog.dialogForEdit(commonNode.val as {})
+    dialog.show((newVal) => {
+      let curData = this.data
+      if (keychain.length > 0) {
+        for (let i = 0; i < keychain.length - 1; ++i) {
+          curData = curData[keychain[i]]
+        }
+        curData[commonNode.curKey] = newVal
+      } else {
+        Object.keys(curData).forEach((key) => {
+          delete curData[key]
+        })
+        Object.assign(curData, newVal)
+      }
+      this.reloadRootNode()
+      this.$emit('change', this.data)
+    })
   }
 }
