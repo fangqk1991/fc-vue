@@ -96,6 +96,7 @@ export class JsonTreeView extends ViewController {
 
     const keychain = commonNode.keychain
     const dialog = JsonEditorDialog.dialogForEdit(commonNode.val as {})
+    dialog.title = `编辑 ${['ROOT', ...keychain].join('.')}`
     dialog.show((newVal) => {
       let curData = this.data
       if (keychain.length > 0) {
