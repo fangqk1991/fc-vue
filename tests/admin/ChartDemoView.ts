@@ -11,7 +11,7 @@ import { LineChartData, MyBarChart, MyLineChart } from '../../echarts'
   template: `
     <div>
       <h4>Charts</h4>
-      <el-tabs type="card" class="mt-4" value="bar-chart">
+      <el-tabs type="card" class="mt-4" value="line-chart">
         <el-tab-pane label="Pie Chart" name="pie-chart">
           <my-pie-chart />
         </el-tab-pane>
@@ -29,6 +29,9 @@ import { LineChartData, MyBarChart, MyLineChart } from '../../echarts'
 })
 export class ChartDemoView extends ViewController {
   lineChartData: LineChartData = {
+    onClick: (params) => {
+      this.$message.success(`Click "${params.seriesName}" - (${params.xValue}, ${params.yValue})`)
+    },
     title: 'Some items',
     xAxisValues: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
     xAxisLabelFormat: (val) => {
