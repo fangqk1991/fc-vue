@@ -37,6 +37,10 @@ export class ChartDemoView extends ViewController {
     xAxisLabelFormat: (val) => {
       return `#${val}#`
     },
+    legendCheckedMap: {
+      Email: true,
+      'Search Engine': false,
+    },
     legends: [
       {
         name: 'Email',

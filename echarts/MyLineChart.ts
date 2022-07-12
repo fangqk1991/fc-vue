@@ -31,6 +31,7 @@ export interface LineChartData {
   xAxisValues: (string | number)[]
   xAxisLabelFormat?: (val: string | number) => string
   legends: LineChartLegend[]
+  legendCheckedMap?: { [p: string]: boolean }
   onClick?: (params: ChartClickParams) => void
 }
 
@@ -107,6 +108,7 @@ export class MyLineChart extends ViewController {
         // left: 'left',
         bottom: '0',
         data: legends.map((item) => item.name),
+        selected: this.data.legendCheckedMap || {},
       },
       grid: {
         left: '3%',
