@@ -4,9 +4,9 @@ import { use } from 'echarts/core'
 import { CanvasRenderer } from 'echarts/renderers'
 import { PieChart } from 'echarts/charts'
 import { LegendComponent, TitleComponent, TooltipComponent } from 'echarts/components'
-import VChart from 'vue-echarts'
 import { EChartsOption } from 'echarts'
 import { RawChartClickEventParams } from './ChartTypes'
+const VChart = require('vue-echarts').default
 
 use([CanvasRenderer, PieChart, TitleComponent, TooltipComponent, LegendComponent])
 
