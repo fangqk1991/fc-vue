@@ -1,5 +1,5 @@
 import { Component, ViewController } from '../../src'
-import { MyPieChart } from '../../echarts/MyPieChart'
+import { MyPieChart, PieChartData } from '../../echarts/MyPieChart'
 import { LineChartData, MyBarChart, MyLineChart } from '../../echarts'
 
 @Component({
@@ -11,9 +11,9 @@ import { LineChartData, MyBarChart, MyLineChart } from '../../echarts'
   template: `
     <div>
       <h4>Charts</h4>
-      <el-tabs type="card" class="mt-4" value="line-chart">
+      <el-tabs type="card" class="mt-4" value="pie-chart">
         <el-tab-pane label="Pie Chart" name="pie-chart">
-          <my-pie-chart />
+          <my-pie-chart :data="pieChartData" height="700px" />
         </el-tab-pane>
         <el-tab-pane label="Line Chart" name="line-chart">
           <my-line-chart :data="lineChartData" height="700px" />
@@ -28,6 +28,20 @@ import { LineChartData, MyBarChart, MyLineChart } from '../../echarts'
   `,
 })
 export class ChartDemoView extends ViewController {
+  pieChartData: PieChartData = {
+    title: 'Traffic Sources',
+    items: [
+      { value: 335, name: 'Direct' },
+      { value: 310, name: 'Email' },
+      { value: 234, name: 'Ad Networks' },
+      { value: 135, name: 'Video Ads' },
+      { value: 1548, name: 'Search Engines' },
+    ],
+    onClick: (params) => {
+      this.$message.success(`Click "${params.name}" - (${params.value})`)
+    },
+  }
+
   lineChartData: LineChartData = {
     onClick: (params) => {
       this.$message.success(`Click "${params.seriesName}" - (${params.xValue}, ${params.yValue})`)

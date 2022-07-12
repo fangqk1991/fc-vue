@@ -24,6 +24,6 @@
     "target": "es5",
     "sourceMap": true
   },
-  "include": ["./app-admin", "./oss-service", "./json", "./tests"],
+  "include": ["./app-admin", "./echarts", "./oss-service", "./json", "./tests"],
   "exclude": ["node_modules"]
 }
