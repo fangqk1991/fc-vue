@@ -49,7 +49,7 @@ export class MyPieChart extends ViewController {
       },
       tooltip: {
         trigger: 'item',
-        formatter: '{b}: {c} ({d}%)',
+        formatter: 'Name: {b}<br /><br />Value: <b>{c}</b><br />Proportion: <b>{d}%</b>',
       },
       legend: {
         orient: 'vertical',
