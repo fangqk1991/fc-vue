@@ -19,6 +19,7 @@ export interface PieChartData {
   title: string
   items: PieDataItem[]
   onClick?: (dataItem: PieDataItem) => void
+  labelFormat?: (val: string) => string
 }
 
 /**
@@ -48,15 +49,28 @@ export class MyPieChart extends ViewController {
       },
       tooltip: {
         trigger: 'item',
-        formatter: '{a} <br/>{b} : {c} ({d}%)',
+        formatter: '{b}: {c} ({d}%)',
       },
       legend: {
         orient: 'vertical',
         left: 'left',
         data: this.data.items.map((item) => item.name),
+        formatter: this.data.labelFormat
+          ? (val) => {
+            return this.data.labelFormat!(val)
+          }
+          : undefined,
       },
       series: [
         {
+          label: {
+            formatter: this.data.labelFormat
+              ? (val) => {
+                  const data = val.data as PieDataItem
+                  return this.data.labelFormat!(data.name)
+                }
+              : undefined,
+          },
           name: this.data.title,
           type: 'pie',
           radius: '55%',

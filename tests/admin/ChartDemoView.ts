@@ -37,6 +37,9 @@ export class ChartDemoView extends ViewController {
       { value: 135, name: 'Video Ads' },
       { value: 1548, name: 'Search Engines' },
     ],
+    labelFormat: (name) => {
+      return `[${name}]`
+    },
     onClick: (params) => {
       this.$message.success(`Click "${params.name}" - (${params.value})`)
     },
