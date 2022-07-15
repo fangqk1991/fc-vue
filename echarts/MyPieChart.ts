@@ -22,6 +22,13 @@ export interface PieChartData {
   labelFormat?: (val: string) => string
 }
 
+export interface PieTooltipFormatterParams {
+  data: PieDataItem
+  name: string
+  value: number
+  percent: number
+}
+
 /**
  * @description https://github.com/ecomfe/vue-echarts
  */
@@ -49,7 +56,11 @@ export class MyPieChart extends ViewController {
       },
       tooltip: {
         trigger: 'item',
-        formatter: '{b}<br /><br />Value: <b>{c}</b><br />Proportion: <b>{d}%</b>',
+        formatter: (rawParams) => {
+          const params = rawParams as PieTooltipFormatterParams
+          const name = this.data.labelFormat ? this.data.labelFormat(params.name) : params.name
+          return `${name}<br /><br />Value: <b>${params.value}</b><br />Proportion: <b>${params.percent}%</b>`
+        },
       },
       legend: {
         orient: 'vertical',
@@ -57,8 +68,8 @@ export class MyPieChart extends ViewController {
         data: this.data.items.map((item) => item.name),
         formatter: this.data.labelFormat
           ? (val) => {
-            return this.data.labelFormat!(val)
-          }
+              return this.data.labelFormat!(val)
+            }
           : undefined,
       },
       series: [
