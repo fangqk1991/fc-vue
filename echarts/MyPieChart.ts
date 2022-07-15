@@ -56,7 +56,7 @@ export class MyPieChart extends ViewController {
       },
       tooltip: {
         trigger: 'item',
-        formatter: (rawParams) => {
+        formatter: (rawParams: any) => {
           const params = rawParams as PieTooltipFormatterParams
           const name = this.data.labelFormat ? this.data.labelFormat(params.name) : params.name
           return `${name}<br /><br />Value: <b>${params.value}</b><br />Proportion: <b>${params.percent}%</b>`
