@@ -1,4 +1,6 @@
 export * from './OssUploadDialog'
+export * from './ImageFormItem'
+export * from './ImageFormItemProtocol'
 export * from './OssHTTP'
 export * from './OssFrontendService'
 export * from './services/OssRouteData'

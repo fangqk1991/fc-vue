@@ -1,0 +1,40 @@
+import { OSSResourceModel } from '@fangcha/oss-service/lib/common/models'
+import { ViewController } from '../src/ViewController'
+import { Component, Prop } from 'vue-property-decorator'
+import { OssUploadDialog } from './OssUploadDialog'
+import { PhotoFormItemProtocol } from './ImageFormItemProtocol'
+
+@Component({
+  template: `
+    <el-form-item :prop="propKey">
+      <div>
+        <span>{{ title }}</span>
+        |
+        <a href="javascript:" @click="uploadPhoto">{{ LS('Upload') }}</a>
+      </div>
+      <div v-if="thumbUrl">
+        <el-image style="border: 1px dashed #c0ccda; border-radius: 6px; width: 250px;" fit="contain" :src="thumbUrl" :preview-src-list="[photoUrl]" />
+      </div>
+    </el-form-item>
+  `,
+})
+export class ImageFormItem extends ViewController {
+  @Prop({ default: null, type: Object }) readonly protocol!: PhotoFormItemProtocol
+
+  @Prop({ default: '', type: String }) readonly title!: string
+  @Prop({ default: '', type: String }) readonly thumbUrl!: string
+  @Prop({ default: '', type: String }) readonly photoUrl!: string
+  @Prop({ default: '', type: String }) readonly propKey!: string
+
+  uploadPhoto() {
+    if (!this.protocol) {
+      return
+    }
+    const dialog = new OssUploadDialog()
+    dialog.inputAccepts = '.jpg,.png,.bmp,.gif,image/*'
+    dialog.metadataDelegate = this.protocol.buildMetadata
+    dialog.show(async (resource: OSSResourceModel) => {
+      await this.protocol.onUploadSuccess(resource)
+    })
+  }
+}
