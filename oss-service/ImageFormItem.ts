@@ -9,8 +9,10 @@ import { PhotoFormItemProtocol } from './ImageFormItemProtocol'
     <el-form-item :prop="propKey">
       <div>
         <span>{{ title }}</span>
-        |
-        <a href="javascript:" @click="uploadPhoto">{{ LS('Upload') }}</a>
+        <template v-if="!disabled">
+          |
+          <a href="javascript:" @click="uploadPhoto">{{ LS('Upload') }}</a>
+        </template>
       </div>
       <div v-if="thumbUrl">
         <el-image style="border: 1px dashed #c0ccda; border-radius: 6px; width: 250px;" fit="contain" :src="thumbUrl" :preview-src-list="[photoUrl]" />
@@ -25,6 +27,7 @@ export class ImageFormItem extends ViewController {
   @Prop({ default: '', type: String }) readonly thumbUrl!: string
   @Prop({ default: '', type: String }) readonly photoUrl!: string
   @Prop({ default: '', type: String }) readonly propKey!: string
+  @Prop({ default: false, type: Boolean }) readonly disabled!: boolean
 
   uploadPhoto() {
     if (!this.protocol) {
