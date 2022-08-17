@@ -4,7 +4,7 @@ import { use } from 'echarts/core'
 import { CanvasRenderer } from 'echarts/renderers'
 import { GridComponent, LegendComponent, TitleComponent, ToolboxComponent, TooltipComponent } from 'echarts/components'
 import { BarChart, LineChart } from 'echarts/charts'
-import { EChartsOption } from 'echarts'
+import { EChartsOption, ToolboxComponentOption } from 'echarts'
 import { RawChartClickEventParams } from './ChartTypes'
 const VChart = require('vue-echarts').default
 
@@ -33,6 +33,7 @@ export interface LineChartData {
   xAxisLabelFormat?: (val: string | number) => string
   legends: LineChartLegend[]
   legendCheckedMap?: { [p: string]: boolean }
+  toolbox?: ToolboxComponentOption
   onClick?: (params: ChartClickParams) => void
 }
 
@@ -91,6 +92,7 @@ export class MyLineChart extends ViewController {
         bottom: '8%',
         containLabel: true,
       },
+      toolbox: this.data.toolbox || {},
       // toolbox: {
       //   feature: {
       //     saveAsImage: {},
