@@ -2,7 +2,7 @@ import { OSSResourceModel } from '@fangcha/oss-service/lib/common/models'
 import { ViewController } from '../src/ViewController'
 import { Component, Prop } from 'vue-property-decorator'
 import { OssUploadDialog } from './OssUploadDialog'
-import { PhotoFormItemProtocol } from './ImageFormItemProtocol'
+import { PhotoFormItemProtocol } from './PhotoFormItemProtocol'
 
 @Component({
   template: `
