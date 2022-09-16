@@ -10,7 +10,7 @@ import { DialogProtocol } from './DialogUtils'
       :visible.sync="visible"
       :width="width"
       :close-on-click-modal="closeOnClickModal"
-      @close="$el.remove()"
+      @close="onClose"
     >
       <div class="mb-3" style="font-size: 16px; line-height: 1.6">
         <slot />
@@ -32,6 +32,7 @@ export class TypicalDialogView extends ViewController implements DialogProtocol 
   @Prop({ default: '', type: String }) readonly confirmBtnText!: string
   @Prop({ default: '', type: String }) readonly customClass!: string
   @Prop({ default: null, type: Function }) readonly callback!: () => Promise<void>
+  @Prop({ default: null, type: Function }) readonly cancelCallback!: () => void
 
   visible = true
   isBusy = false
@@ -51,10 +52,12 @@ export class TypicalDialogView extends ViewController implements DialogProtocol 
     }
   }
 
+  closeWithOK = false
   async onClickConfirm() {
     if (this.callback) {
       await this.execExclusiveHandler(this.callback)
     }
+    this.closeWithOK = true
     this.dismiss()
   }
 
@@ -64,6 +67,13 @@ export class TypicalDialogView extends ViewController implements DialogProtocol 
 
   dismiss() {
     this.visible = false
+  }
+
+  onClose() {
+    if (!this.closeWithOK && this.cancelCallback) {
+      this.cancelCallback()
+    }
+    this.$el.remove()
   }
 
   viewDidLoad() {}

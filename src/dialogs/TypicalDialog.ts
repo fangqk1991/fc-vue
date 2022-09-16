@@ -8,7 +8,7 @@ import { TypicalDialogView } from './TypicalDialogView'
     'typical-dialog-view': TypicalDialogView,
   },
   template: `
-    <typical-dialog-view ref="my-dialog" :title="title" :callback="callback">
+    <typical-dialog-view ref="my-dialog" :title="title" :callback="callback" :cancel-callback="cancelCallback">
       <slot />
     </typical-dialog-view>
   `,
@@ -16,6 +16,7 @@ import { TypicalDialogView } from './TypicalDialogView'
 export class TypicalDialog<T = any> extends ViewController {
   title = 'Title'
   callback = async () => {}
+  cancelCallback = () => {}
   result: any = undefined
 
   viewDidLoad() {}

@@ -1,4 +1,5 @@
 import { Component, HtmlDisplayPanel, HtmlEditorDialog, HtmlPreviewDialog, ViewController } from '../../src'
+import { TypicalDemoDialog } from './TypicalDemoDialog'
 
 @Component({
   components: {
@@ -9,6 +10,7 @@ import { Component, HtmlDisplayPanel, HtmlEditorDialog, HtmlPreviewDialog, ViewC
       <el-card>
         <h4>HTML Dialogs</h4>
         <div>
+          <el-button @click="onClick_TypicalDemoDialog">TypicalDemoDialog</el-button>
           <el-button @click="onClick_HtmlPreviewDialog">HtmlPreviewDialog</el-button>
           <el-button @click="onClick_HtmlEditorDialog">HtmlEditorDialog</el-button>
         </div>
@@ -39,6 +41,16 @@ export class DialogDemoView extends ViewController {
     const dialog = HtmlEditorDialog.dialogForEdit(this.demoHTML)
     dialog.show(async (content) => {
       console.info(content)
+    })
+  }
+
+  onClick_TypicalDemoDialog() {
+    const dialog = new TypicalDemoDialog()
+    dialog.cancelCallback = () => {
+      this.$message.warning('on cancel')
+    }
+    dialog.show(async () => {
+      this.$message.success('on confirm')
     })
   }
 }
