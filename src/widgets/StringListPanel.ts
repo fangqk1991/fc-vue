@@ -7,11 +7,11 @@ import { SimpleInputDialog } from '../dialogs'
     <div style="line-height: 2">
       <el-tag
         v-for="(str, $index) in strList"
-        class="mr-2"
+        class="adaptive-tag"
         :key="$index"
         closable
-        size="small"
         @close="onRemoveItemAtIndex($index)"
+        style="margin-right: 4px;"
       >
         {{ str }}
       </el-tag>
