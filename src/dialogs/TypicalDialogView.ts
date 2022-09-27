@@ -1,11 +1,12 @@
 import { Component, Prop } from 'vue-property-decorator'
 import { ViewController } from '../ViewController'
 import { DialogProtocol } from './DialogUtils'
+import './dialog.scss'
 
 @Component({
   template: `
     <el-dialog
-      :custom-class="customClass"
+      :custom-class="customClass + ' fit-narrow-screen'"
       :title="title"
       :visible.sync="visible"
       :width="width"
