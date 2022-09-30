@@ -22,6 +22,22 @@ Vue.filter('Unix_To_ISO8601', function (val: any) {
 Vue.filter('describe_locale', function (val: any) {
   return I18nCodeDescriptor.describe(val)
 })
+Vue.filter(
+  'digit_format',
+  function (n: number | string, digits: number = 2, maximumFractionDigits: number | null = null) {
+    if (n === '' || n === null || n === undefined) {
+      return ''
+    }
+    if (maximumFractionDigits === null) {
+      maximumFractionDigits = digits
+    }
+    const config =
+      digits === 0 && maximumFractionDigits === 0
+        ? {}
+        : { maximumFractionDigits: maximumFractionDigits, minimumFractionDigits: digits }
+    return Number(n).toLocaleString('en-US', config)
+  }
+)
 
 export class BasicApp implements BasicAppProtocol {
   public config!: BasicAppConfig
