@@ -20,6 +20,9 @@ const app = new AdminApp({
   homeView: HomeView,
   useRemoteLocale: false,
   profileViewUrl: '/v1/profile',
+  appDidLoad: async () => {
+    await sleep(1000)
+  },
   sidebarNodes: [
     {
       titleEn: 'Permission',

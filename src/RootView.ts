@@ -2,6 +2,11 @@ import { Component } from 'vue-property-decorator'
 import { ViewController } from './ViewController'
 
 @Component({
-  template: `<router-view />`,
+  template: `
+    <div v-if="!isReady" v-loading="true" style="width: 100vw; height: 100vh;" />
+    <router-view v-else />
+  `,
 })
-export class RootView extends ViewController {}
+export class RootView extends ViewController {
+  isReady = false
+}

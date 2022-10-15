@@ -75,16 +75,10 @@ export class BasicApp implements BasicAppProtocol {
   }
 
   private MainLayout() {
-    const app = this
     @Component({
-      template: `
-        <div v-if="!$app.isReady" v-loading="true" style="width: 100vw; height: 100vh;" />
-        <router-view v-else />
-      `,
+      template: `<router-view />`,
     })
-    class MainLayout extends ViewController {
-      $app: any = app
-    }
+    class MainLayout extends ViewController {}
     return MainLayout
   }
 
@@ -148,7 +142,7 @@ export class BasicApp implements BasicAppProtocol {
       }
     }
 
-    new RootView({
+    const rootView = new RootView({
       el: '#app',
       router: router,
       i18n: i18n,
@@ -163,6 +157,7 @@ export class BasicApp implements BasicAppProtocol {
         }
       }
       this.isReady = true
+      rootView.isReady = true
     }
     handler()
   }

@@ -14,8 +14,7 @@ import { I18nCode, I18nCodeDescriptor } from '@fangcha/tools'
     'page-403': Page403,
   },
   template: `
-    <div v-if="!$app.isReady" v-loading="true" style="width: 100vw; height: 100vh;" />
-    <el-container v-else class="fc-theme" style="height: 100vh; overflow-x: hidden; overflow-y: auto;">
+    <el-container class="fc-theme" style="height: 100vh; overflow-x: hidden; overflow-y: auto;">
       <el-header class="app-header">
         <div class="title-wrapper">
           <app-dropdown-menu class="only-narrow-screen"/>
