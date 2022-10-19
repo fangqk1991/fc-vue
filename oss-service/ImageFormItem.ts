@@ -1,8 +1,12 @@
-import { OSSResourceModel } from '@fangcha/oss-service/lib/common/models'
+import { MetadataBuildProtocol, OSSResourceModel } from '@fangcha/oss-service/lib/common/models'
 import { ViewController } from '../src/ViewController'
 import { Component, Prop } from 'vue-property-decorator'
 import { OssUploadDialog } from './OssUploadDialog'
-import { PhotoFormItemProtocol } from './PhotoFormItemProtocol'
+
+export interface PhotoFormItemProtocol {
+  buildMetadata: MetadataBuildProtocol
+  onUploadSuccess: (resource: OSSResourceModel) => Promise<void>
+}
 
 @Component({
   template: `
