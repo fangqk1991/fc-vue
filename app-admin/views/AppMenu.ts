@@ -7,8 +7,8 @@ import { makeUUID } from '@fangcha/tools'
     <el-menu :default-active="$route.path" :default-openeds="defaultOpeneds" :collapse="collapse" :unique-opened="uniqueOpened">
       <el-submenu
         v-for="menu in menus"
-        :key="menu.titleZh"
-        :index="menu.titleZh"
+        :key="menu.uid"
+        :index="menu.uid"
         popper-class="sidebar-popper"
       >
         <template slot="title">
@@ -64,7 +64,7 @@ export class AppMenu extends ViewController {
   viewDidLoad() {
     this.reloadSidebar()
     if (!this.uniqueOpened) {
-      this.defaultOpeneds = this.sidebarOptions.map((item) => item.titleZh)
+      this.defaultOpeneds = this.sidebarOptions.map((item) => item.uid!)
     }
     NotificationCenter.defaultCenter().addObserver('__onSidebarOptionsChanged', () => {
       this.reloadSidebar()

@@ -1,8 +1,8 @@
 import { RouteConfig } from 'vue-router'
 import { NotificationCenter } from 'notification-center-js'
-import { VisitorInfo } from '@fangcha/tools'
+import { makeUUID, VisitorInfo } from '@fangcha/tools'
 import { BasicApp } from '../app'
-import { MenuSubNode } from '../src/sidebars'
+import { MenuMainNode, MenuSubNode } from '../src/sidebars'
 import { i18n } from '../src/i18n'
 import { AxiosSettings } from '../basic'
 import { AppView } from './views/AppView'
@@ -69,6 +69,25 @@ export class AdminApp extends BasicApp {
     return this.visitorInfo
   }
 
+  public updateMenu(menuUid: string, params: Partial<MenuMainNode>) {
+    const sidebarNode = this.config.sidebarNodes.find((item) => item.uid === menuUid)
+    if (sidebarNode) {
+      if (params.titleEn !== undefined) {
+        sidebarNode.titleEn = params.titleEn
+      }
+      if (params.titleZh !== undefined) {
+        sidebarNode.titleZh = params.titleZh
+      }
+      if (params.icon !== undefined) {
+        sidebarNode.icon = params.icon
+      }
+      if (params.links !== undefined) {
+        sidebarNode.links = params.links
+      }
+      NotificationCenter.defaultCenter().postNotification('__onSidebarOptionsChanged')
+    }
+  }
+
   public updateMenuLinks(menuUid: string, links: MenuSubNode[]) {
     const sidebarNode = this.config.sidebarNodes.find((item) => item.uid === menuUid)
     if (sidebarNode) {
@@ -78,7 +97,10 @@ export class AdminApp extends BasicApp {
   }
 
   public sidebarNodes() {
-    return this.config.sidebarNodes
+    return this.config.sidebarNodes.map((item) => {
+      item.uid = item.uid || makeUUID()
+      return item
+    })
   }
 
   public checkPathAccessible(path: string) {

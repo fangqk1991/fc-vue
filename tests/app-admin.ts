@@ -124,6 +124,25 @@ const app = new AdminApp({
         },
       ],
     },
+    {
+      uid: 'menu',
+      titleEn: 'AppMenu',
+      titleZh: 'AppMenu',
+      icon: 'el-icon-user',
+      links: [
+        {
+          titleEn: 'onClick',
+          titleZh: 'onClick',
+          onClick: () => {
+            const randomNum = Math.floor(Math.random() * 10)
+            app.updateMenu('menu', {
+              titleEn: `Menu - ${randomNum}`,
+              titleZh: `Menu - ${randomNum}`,
+            })
+          },
+        },
+      ],
+    },
   ],
   routes: [
     {
