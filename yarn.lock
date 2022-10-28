@@ -1010,17 +1010,17 @@
   resolved "https://registry.yarnpkg.com/@discoveryjs/json-ext/-/json-ext-0.5.7.tgz#1d572bfbbe14b7704e0ba0f39b74815b84870d70"
   integrity sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==
 
-"@fangcha/app-error@>=1":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@fangcha/app-error/-/app-error-1.1.0.tgz#6055f5b537dc05a384dab45cbf60958f3337a37b"
-  integrity sha512-9A4xraQWNoEwUdP0Rs1+WJnV0f4ufFytYQ/y/X+5UqVpxu3OVlwUlp7rBOehioECVOh06qIF6geV1sXqUdFOIA==
+"@fangcha/app-error@^1.3.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@fangcha/app-error/-/app-error-1.4.0.tgz#2fdcb6e146652ea6a6a6db55bdd8599f19f21b58"
+  integrity sha512-sF3IRxL4pXVXBhRyqd5oTFqjwW3d2ag4Fo2K3HhTdJ3moM4gGT9dpIf412bgjXXBoQLMOPCtdkISnBg9xA7Vnw==
 
-"@fangcha/app-request@^1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@fangcha/app-request/-/app-request-1.3.0.tgz#4366b26c52a0093016d713527f52bebc56334248"
-  integrity sha512-MPuAak7d6UGwESBecPfJF9C29O7fppcxzFZ8G672f3bgeIipUhJu75O18vZVcg9yST+RP5sfxR/dJAZIhf7MtA==
+"@fangcha/app-request@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@fangcha/app-request/-/app-request-1.5.0.tgz#876bc42b3e8ddd0f019d27db40cf25e803c8b516"
+  integrity sha512-Lc648rIQKv04zX770mKZ3ZdQFL1XpGbC9PGobvb36KEerISGP6FitULb9MzDxRwgTQO1m2UNzvgCw+94nlRn8w==
   dependencies:
-    "@fangcha/app-error" ">=1"
+    "@fangcha/app-error" "^1.3.0"
     axios ">=0.19.0"
     form-data "^3.0.0"
     qs ">=6"
