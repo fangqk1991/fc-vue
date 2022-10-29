@@ -10,7 +10,7 @@ import { JsonPre } from './JsonPre'
   template: `
     <typical-dialog-view :title="title" width="70%" :callback="callback">
       <div>
-        <el-input v-model="dataStr" :rows="10" type="textarea"></el-input>
+        <el-input v-model="dataStr" :rows="rows" type="textarea"></el-input>
       </div>
       <div class="mt-2">
         <el-button type="primary" size="mini" @click="checkValid">格式化校验</el-button>
@@ -21,6 +21,7 @@ import { JsonPre } from './JsonPre'
 export class JsonEditorDialog extends TypicalDialog {
   data = {}
   dataStr = ''
+  rows = 10
 
   constructor() {
     super()
@@ -30,7 +31,7 @@ export class JsonEditorDialog extends TypicalDialog {
     this.dataStr = JSON.stringify(this.data, null, 2)
   }
 
-  static dialogForEdit(data: {}) {
+  static dialogForEdit<T = {}>(data: T) {
     const dialog = new JsonEditorDialog()
     dialog.title = '编辑'
     dialog.data = JSON.parse(JSON.stringify(data))
