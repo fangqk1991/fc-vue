@@ -53,6 +53,9 @@ export class BasicApp implements BasicAppProtocol {
 
   public constructor(options: BasicAppConfig) {
     this.config = options
+    if (options.appName) {
+      this.setTitle(options.appName)
+    }
   }
 
   public plugins() {
@@ -167,5 +170,9 @@ export class BasicApp implements BasicAppProtocol {
       console.info(`App is waiting for ready...`)
       await sleep(100)
     }
+  }
+
+  public setTitle(title: string) {
+    document.title = title
   }
 }

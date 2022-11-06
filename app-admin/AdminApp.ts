@@ -123,10 +123,6 @@ export class AdminApp extends BasicApp {
     }
   }
 
-  public setTitle(title: string) {
-    document.title = title
-  }
-
   public hasPermission(permissionKey: string) {
     return !!this.visitorInfo.permissionKeyMap[permissionKey]
   }
