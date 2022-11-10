@@ -29,7 +29,7 @@ import { I18nCode, I18nCodeDescriptor } from '@fangcha/tools'
               <el-dropdown-item v-for="option in i18nCodeOptions" :key="option.value" :command="option.value">{{ option.label }}</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
-          <el-dropdown class="ml-2">
+          <el-dropdown v-if="$app.visitorInfo" class="ml-2">
             <span class="el-dropdown-link"> {{ $app.visitorInfo.email }}<i class="el-icon-arrow-down el-icon--right"></i> </span>
             <el-dropdown-menu slot="dropdown">
               <link-dropdown-item :link="$app.config.profileViewUrl" :use-router="true">
