@@ -3,6 +3,7 @@ import Vue from 'vue'
 import { LoginView } from './views/LoginView'
 import { ProfileView } from './views/ProfileView'
 import { FrontendPluginProtocol } from '../basic'
+import 'bootstrap'
 
 export * from './views/LoginView'
 export * from './views/ProfileView'

@@ -1,9 +1,9 @@
 import { Component } from 'vue-property-decorator'
 import { KitAuthApis } from '@fangcha/backend-kit/lib/apis'
-import '../assets/css/main.scss'
 import { MySession } from '../services/MySession'
 import { ViewController } from '../../src/ViewController'
 import { MyAxios } from '../../basic'
+import './signin.scss'
 
 @Component({
   template: `
@@ -16,7 +16,7 @@ import { MyAxios } from '../../basic'
       <div class="input-group input-last">
         <input v-model="params.password" type="password" class="form-control" placeholder="密码" required @keyup.enter="onSubmit"/>
       </div>
-      <button class="btn btn-lg btn-primary btn-block" :disabled="isLoading" @click="onSubmit">登录</button>
+      <button class="btn btn-lg btn-primary" style="width: 100%;" :disabled="isLoading" @click="onSubmit">登录</button>
     </div>
   `,
 })

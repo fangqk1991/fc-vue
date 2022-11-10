@@ -3,12 +3,13 @@ import { KitAuthApis } from '@fangcha/backend-kit/lib/apis'
 import { MySession } from '../services/MySession'
 import { ViewController } from '../../src/ViewController'
 import { MyAxios } from '../../basic'
+import './signin.scss'
 
 @Component({
   template: `
     <div class="fc-sso-form">
       <div v-if="$session.curUser" class="mb-4">Email: {{ $session.curUser.email }}</div>
-      <button class="btn btn-danger btn-block" @click="onLogout">登出</button>
+      <button class="btn btn-danger" style="width: 100%;" @click="onLogout">登出</button>
     </div>
   `,
 })
