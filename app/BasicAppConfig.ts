@@ -5,6 +5,7 @@ import { FrontendPluginProtocol } from '../basic'
 export interface BasicAppConfig {
   appName?: string
   routes?: RouteConfig[]
+  independentRoutes?: RouteConfig[]
   appWillLoad?: () => void
   appDidLoad?: () => Promise<void>
   guardBeforeEachRoute?: NavigationGuard

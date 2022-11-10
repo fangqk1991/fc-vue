@@ -87,6 +87,7 @@ export class BasicApp implements BasicAppProtocol {
 
   protected prepareRouter() {
     const routes: RouteConfig[] = []
+    const independentRoutes: RouteConfig[] = []
     if (this.config.homeView) {
       routes.push({
         path: '/',
@@ -98,9 +99,15 @@ export class BasicApp implements BasicAppProtocol {
       if (plugin.routes) {
         routes.push(...plugin.routes)
       }
+      if (plugin.independentRoutes) {
+        independentRoutes.push(...plugin.independentRoutes)
+      }
     }
     if (this.config.routes) {
       routes.push(...this.config.routes)
+    }
+    if (this.config.independentRoutes) {
+      independentRoutes.push(...this.config.independentRoutes)
     }
     routes.push({
       path: '*',
@@ -110,6 +117,7 @@ export class BasicApp implements BasicAppProtocol {
     const router = new VueRouter({
       mode: 'history',
       routes: [
+        ...independentRoutes,
         {
           path: '',
           component: this.config.mainLayout || this.MainLayout(),

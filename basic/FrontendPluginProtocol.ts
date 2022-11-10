@@ -4,4 +4,5 @@ export interface FrontendPluginProtocol {
   onAppWillLoad?: () => void
   onAppDidLoad?: () => Promise<void>
   routes?: RouteConfig[]
+  independentRoutes?: RouteConfig[]
 }
