@@ -1025,6 +1025,11 @@
     form-data "^3.0.0"
     qs ">=6"
 
+"@fangcha/backend-kit@^0.34.0":
+  version "0.34.0"
+  resolved "https://registry.yarnpkg.com/@fangcha/backend-kit/-/backend-kit-0.34.0.tgz#8ef8238ec7f6097145639f6c144aded128f0013e"
+  integrity sha512-+TIo68gkHkY7FSI/o/xa0sEWbdiXMKaGoeUNv3ne2Rz20TAnNgOUngq/CwEaySKHtj/Xch6ZpIbeuN3/ke2bIw==
+
 "@fangcha/eslint@^0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@fangcha/eslint/-/eslint-0.2.0.tgz#aca6b6a1e57fd4fb0de809bad38bfdcc7f1baec2"
@@ -1056,6 +1061,11 @@
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/@fangcha/oss-service/-/oss-service-0.6.0.tgz#24c860f51591ccb0188e41c8c02c9c848c39da25"
   integrity sha512-nlZ1814TIiw89qLHPd7ZhuvxlHuaiKq494oxDCxXQNtYsLkH9DC5azsFJwUFUX5dWlTndrn3wGs4p31pMLZ00g==
+
+"@fangcha/router@^0.18.1":
+  version "0.18.1"
+  resolved "https://registry.yarnpkg.com/@fangcha/router/-/router-0.18.1.tgz#15c904f79d9d880e355566685010a02231af925f"
+  integrity sha512-pNjl0dk4RY6CSBhyAELiWcUcb/rCxHrPsjzUSpyQNlK4hRMVLOfGqGloW8TKEc2VCm8ej5jTIkT4I4H78tmfAw==
 
 "@fangcha/tools@^1.22.0":
   version "1.22.0"
