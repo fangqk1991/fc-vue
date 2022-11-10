@@ -119,7 +119,7 @@ export class BasicApp implements BasicAppProtocol {
       routes: [
         ...independentRoutes,
         {
-          path: '',
+          path: this.config.mainPathPrefix || '',
           component: this.config.mainLayout || this.MainLayout(),
           children: routes,
         },
