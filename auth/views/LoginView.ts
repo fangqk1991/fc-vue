@@ -1,8 +1,6 @@
 import { Component } from 'vue-property-decorator'
-import { KitAuthApis } from '@fangcha/backend-kit/lib/apis'
 import { MySession } from '../services/MySession'
 import { ViewController } from '../../src/ViewController'
-import { MyAxios } from '../../basic'
 import './signin.scss'
 
 @Component({
@@ -28,9 +26,7 @@ export class LoginView extends ViewController {
 
   async onSubmit() {
     await this.execHandler(async () => {
-      const request = MyAxios(KitAuthApis.Login)
-      request.setBodyData(this.params)
-      await request.quickSend()
+      await MySession.submitLogin(this.params)
       await MySession.onLoginSuccess()
     })
   }

@@ -5,6 +5,7 @@
   "scripts": {
     "start": "webpack-dev-server --config webpack.admin-dev.js",
     "start-auth": "webpack-dev-server --config webpack.auth-dev.js",
+    "start-auth-fo-server": "webpack-dev-server --config webpack.auth-for-server.js",
     "start-tiny": "webpack-dev-server --config webpack.dev.js",
     "build": "rm -rf dist && webpack --config webpack.test.js",
     "test": "rm -rf dist && webpack --config webpack.test.js"
@@ -30,12 +31,16 @@
     "vue-router": "^3.1.5"
   },
   "devDependencies": {
+    "@fangcha/account": "^0.11.0",
     "@fangcha/app-request": "^1.5.0",
+    "@fangcha/assert": "^1.1.0",
     "@fangcha/backend-kit": "^0.34.0",
     "@fangcha/eslint": "^0.2.0",
     "@fangcha/event-stat": "^0.6.0",
     "@fangcha/oss-service": "^0.6.0",
     "@fangcha/router": "^0.18.1",
+    "@fangcha/sso-server": "^0.13.0",
+    "@fangcha/swagger": "^0.1.1",
     "@fangcha/tools": "^1.22.0",
     "@fangcha/webpack": "^0.8.0",
     "@types/assert": "^1.5.4",

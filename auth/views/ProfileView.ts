@@ -1,9 +1,7 @@
 import { Component } from 'vue-property-decorator'
-import { KitAuthApis } from '@fangcha/backend-kit/lib/apis'
-import { MySession } from '../services/MySession'
 import { ViewController } from '../../src/ViewController'
-import { MyAxios } from '../../basic'
 import './signin.scss'
+import { MySession } from '../services/MySession'
 
 @Component({
   template: `
@@ -15,8 +13,6 @@ import './signin.scss'
 })
 export class ProfileView extends ViewController {
   async onLogout() {
-    await MyAxios(KitAuthApis.Logout).quickSend()
-    await MySession.reloadSessionInfo()
-    MySession.redirectIfNeed()
+    window.location.href = MySession.logoutApiPath
   }
 }

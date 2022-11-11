@@ -1,6 +1,8 @@
 import { RetainedSessionApis } from '@fangcha/router/lib/apis'
 import { SessionInfo } from '@fangcha/router/lib/models'
-import { MyAxios } from '../../basic'
+import { KitAuthApis } from '@fangcha/backend-kit/lib/apis'
+import { AccountSimpleParams } from '@fangcha/account/lib/common/models'
+import { MyAxios } from './MyAxios'
 
 const getParameterByName = (name: string, url = window.location.href) => {
   name = name.replace(/[[\]]/g, '\\$&')
@@ -19,6 +21,7 @@ export class Session {
   public loginPagePath = '/login'
   public signupPagePath = '/signup'
   public defaultRedirectUri = '/profile'
+  public logoutApiPath = KitAuthApis.RedirectLogout.route
 
   public constructor() {}
 
@@ -62,6 +65,12 @@ export class Session {
         window.location.href = `${this.loginPagePath}?redirectUri=${encodeURIComponent(window.location.href)}`
       }
     }
+  }
+
+  public submitLogin = async (params: AccountSimpleParams) => {
+    const request = MyAxios(KitAuthApis.Login)
+    request.setBodyData(params)
+    await request.quickSend()
   }
 }
 
