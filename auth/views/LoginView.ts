@@ -24,6 +24,10 @@ export class LoginView extends ViewController {
     password: '',
   }
 
+  viewDidLoad() {
+    MySession.redirectIfNeed()
+  }
+
   async onSubmit() {
     await this.execHandler(async () => {
       await MySession.submitLogin(this.params)
