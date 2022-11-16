@@ -1,8 +1,8 @@
-import { RetainedSessionApis } from '@fangcha/router/lib/apis'
-import { SessionInfo } from '@fangcha/router/lib/models'
 import { KitAuthApis } from '@fangcha/backend-kit/lib/apis'
 import { AccountSimpleParams } from '@fangcha/account/lib/common/models'
 import { MyAxios } from './MyAxios'
+import { RetainedSessionApis } from '@fangcha/backend-kit/lib/common/apis'
+import { SessionInfo } from '@fangcha/backend-kit/lib/common/models'
 
 const getParameterByName = (name: string, url = window.location.href) => {
   name = name.replace(/[[\]]/g, '\\$&')
@@ -40,8 +40,9 @@ export class Session {
   }
 
   public async reloadSessionInfo() {
-    const response = await MyAxios(RetainedSessionApis.SessionInfoGet).quickSend<SessionInfo>()
+    const response = await MyAxios(RetainedSessionApis.SessionInfoGet).quickSend<SessionInfo<SessionConfig>>()
     this.curUser = response.userInfo
+    Object.assign(this.config, response.config)
     return !!this.curUser
   }
 
