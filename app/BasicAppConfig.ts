@@ -9,6 +9,7 @@ export interface BasicAppConfig {
   independentRoutes?: RouteConfig[]
   appWillLoad?: () => void
   appDidLoad?: () => Promise<void>
+  pluginsDidLoad?: () => Promise<void>
   guardBeforeEachRoute?: NavigationGuard
   mainLayout?: typeof Vue
   homeView?: typeof Vue

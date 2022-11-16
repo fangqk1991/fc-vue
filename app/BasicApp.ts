@@ -167,6 +167,8 @@ export class BasicApp implements BasicAppProtocol {
           await plugin.onAppDidLoad()
         }
       }
+      const pluginsDidLoad = this.config.pluginsDidLoad || (async () => {})
+      await pluginsDidLoad()
       this.isReady = true
       rootView.isReady = true
     }
