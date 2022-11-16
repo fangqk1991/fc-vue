@@ -6,8 +6,8 @@ import './signin.scss'
 @Component({
   template: `
     <div class="fc-sso-form">
-      <div class="logo mb-4" />
-      <h1 class="h3 mb-3 font-weight-normal">请登录</h1>
+      <div class="logo mb-4" :style="logoStyle" />
+      <div class="h3 mb-3 font-weight-normal">请登录</div>
       <div class="input-group input-first">
         <input v-model="params.email" type="text" class="form-control" placeholder="邮箱" required autofocus />
       </div>
@@ -26,6 +26,12 @@ export class LoginView extends ViewController {
 
   viewDidLoad() {
     MySession.redirectIfNeed()
+  }
+
+  get logoStyle() {
+    return {
+      'background': this.$session.config.logoCss,
+    }
   }
 
   async onSubmit() {

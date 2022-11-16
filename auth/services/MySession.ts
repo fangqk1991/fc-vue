@@ -13,6 +13,12 @@ const getParameterByName = (name: string, url = window.location.href) => {
   return decodeURIComponent(results[2].replace(/\+/g, ' '))
 }
 
+export interface SessionConfig {
+  appName: string
+  logoCss: string
+  background: string
+}
+
 export class Session {
   public curUser: {
     email: string
@@ -71,6 +77,12 @@ export class Session {
     const request = MyAxios(KitAuthApis.Login)
     request.setBodyData(params)
     await request.quickSend()
+  }
+
+  public config: SessionConfig = {
+    appName: 'Fangcha',
+    background: '#f5f5f5',
+    logoCss: 'linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%)',
   }
 }
 
