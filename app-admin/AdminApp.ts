@@ -6,7 +6,7 @@ import { MenuMainNode, MenuSubNode } from '../src/sidebars'
 import { i18n } from '../src/i18n'
 import { AxiosSettings } from '../basic'
 import { AppView } from './views/AppView'
-import { AdminAppConfig } from './AdminAppConfig'
+import { AdminAppConfig, AdminCssStyle } from './AdminAppConfig'
 import 'bootstrap'
 
 export class AdminApp extends BasicApp {
@@ -15,6 +15,13 @@ export class AdminApp extends BasicApp {
   isReady = false
   // 为做到响应式而进行赋值
   public visitorInfo: VisitorInfo = null as any
+
+  public style: AdminCssStyle = {
+    appHeader: {
+      textColor: '',
+      background: '',
+    },
+  }
 
   pathRouteMap: { [path: string]: RouteConfig } = {}
 
@@ -59,6 +66,14 @@ export class AdminApp extends BasicApp {
     options.mainLayout = AppView
     AxiosSettings.loginUrl = options.loginUrl
     options.profileViewUrl = options.profileViewUrl || '#'
+
+    const style: AdminCssStyle = {
+      ...(options.style || {}),
+    }
+    style.appHeader = style.appHeader || {}
+    style.appHeader.textColor = style.appHeader.textColor || ''
+    style.appHeader.background = style.appHeader.background || ''
+    this.style = style
   }
 
   public async reloadUserInfo() {

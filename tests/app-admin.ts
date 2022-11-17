@@ -20,6 +20,11 @@ const app = new AdminApp({
   homeView: HomeView,
   useRemoteLocale: false,
   profileViewUrl: '/v1/profile',
+  style: {
+    appHeader: {
+      background: '#DD73A4',
+    },
+  },
   appDidLoad: async () => {
     await sleep(1000)
   },

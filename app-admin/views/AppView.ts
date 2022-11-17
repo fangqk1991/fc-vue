@@ -15,11 +15,11 @@ import { I18nCode, I18nCodeDescriptor } from '@fangcha/tools'
   },
   template: `
     <el-container class="fc-theme" style="height: 100vh; overflow-x: hidden; overflow-y: auto;">
-      <el-header class="app-header">
+      <el-header class="app-header" :style="$app.style.appHeader">
         <div class="title-wrapper">
           <app-dropdown-menu class="only-narrow-screen"/>
           <div class="title">
-            <router-link to="/" style="color: white">{{ $app.appName() }}</router-link>
+            <router-link to="/" :style="{ color: $app.style.appHeader.textColor || 'white' }">{{ $app.appName() }}</router-link>
           </div>
         </div>
         <div>

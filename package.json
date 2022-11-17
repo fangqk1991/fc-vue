@@ -1,6 +1,6 @@
 {
   "name": "@fangcha/vue",
-  "version": "0.56.0",
+  "version": "0.57.0",
   "main": "src/index.ts",
   "scripts": {
     "start": "webpack-dev-server --config webpack.admin-dev.js",

@@ -5,6 +5,13 @@ import { MenuMainNode } from '../src/sidebars'
 import { FrontendPluginProtocol } from '../basic'
 import { BasicAppConfig } from '../app'
 
+export interface AdminCssStyle {
+  appHeader?: {
+    textColor?: string
+    background?: string
+  }
+}
+
 export interface AdminAppConfig extends BasicAppConfig {
   appName: string
   routes: RouteConfig[]
@@ -28,4 +35,6 @@ export interface AdminAppConfig extends BasicAppConfig {
   sidebarUniqueOpened?: boolean
   view403?: { new (): Vue }
   allowAnonymous?: boolean
+
+  style?: AdminCssStyle
 }
