@@ -95,6 +95,12 @@ export class BasicApp implements BasicAppProtocol {
         name: 'HomeView',
       })
     }
+    if (this.config.routes) {
+      routes.push(...this.config.routes)
+    }
+    if (this.config.independentRoutes) {
+      independentRoutes.push(...this.config.independentRoutes)
+    }
     for (const plugin of this.plugins()) {
       if (plugin.routes) {
         routes.push(...plugin.routes)
@@ -103,25 +109,19 @@ export class BasicApp implements BasicAppProtocol {
         independentRoutes.push(...plugin.independentRoutes)
       }
     }
-    if (this.config.routes) {
-      routes.push(...this.config.routes)
-    }
-    if (this.config.independentRoutes) {
-      independentRoutes.push(...this.config.independentRoutes)
-    }
-    routes.push({
-      path: '*',
-      component: Page404,
-      name: 'Page404',
-    })
     const router = new VueRouter({
       mode: 'history',
       routes: [
-        ...independentRoutes,
         {
           path: this.config.mainPathPrefix || '',
           component: this.config.mainLayout || this.MainLayout(),
           children: routes,
+        },
+        ...independentRoutes,
+        {
+          path: '*',
+          component: Page404,
+          name: 'Page404',
         },
       ],
     })
