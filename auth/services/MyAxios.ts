@@ -26,7 +26,10 @@ export class _MyAxios extends AxiosBuilder {
       }
 
       const i18nPhrase = responseData?.phrase
-      const errMessage = (i18nPhrase && i18n.te(i18nPhrase) ? i18n.t(i18nPhrase) : i18nPhrase) as string
+      let errMessage = (i18nPhrase && i18n.te(i18nPhrase) ? i18n.t(i18nPhrase) : i18nPhrase) as string
+      if (!errMessage) {
+        errMessage = typeof responseData === 'string' ? responseData : 'Unknown error'
+      }
       if (this._errorMsgHandler) {
         this._errorMsgHandler(errMessage, i18nPhrase)
       } else if (!this._mute) {

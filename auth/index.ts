@@ -8,6 +8,7 @@ import { AccountSimpleParams } from '@fangcha/account/lib/common/models'
 import { LoginApis } from '@fangcha/sso-server/lib/common/web-api'
 import { MyAxios } from './services/MyAxios'
 import { LoginLayout } from './views/LoginLayout'
+import { SignupView } from './views/SignupView'
 
 export * from './views/LoginView'
 export * from './views/ProfileView'
@@ -29,6 +30,11 @@ export const AuthPluginForClient = (): FrontendPluginProtocol => {
             path: '/login',
             component: LoginView,
             name: 'LoginView',
+          },
+          {
+            path: '/signup',
+            component: SignupView,
+            name: 'SignupView',
           },
           {
             path: '/profile',
