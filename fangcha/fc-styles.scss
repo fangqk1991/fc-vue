@@ -1,7 +1,7 @@
 @import '../bootstrap/bootstrap-like';
 @import 'element-variables';
 @import 'element-custom';
-@import "~bootstrap/scss/bootstrap";
+@import '~bootstrap/scss/bootstrap';
 
 html {
   font-size: 14px;
@@ -329,4 +329,10 @@ pre.my-pre {
   transition: 0.3s;
 
   padding: 10px;
+}
+
+ul.fc-clean-ul {
+  list-style-type: none;
+  padding-left: 10px;
+  margin-bottom: 0;
 }
