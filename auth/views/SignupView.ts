@@ -18,7 +18,7 @@ import { SignupApis } from '@fangcha/sso-server/lib/common/web-api'
       </div>
       <button class="btn btn-lg btn-primary" style="width: 100%;" :disabled="isLoading" @click="onSubmit">登录</button>
       <p class="extras">
-        <router-link to="/login"> >> 已有账号，点击登录</router-link>
+        <router-link :to="{ path: '/login', query: $route.query }"> >> 已有账号，点击登录</router-link>
       </p>
     </div>
   `,

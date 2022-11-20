@@ -16,7 +16,7 @@ import './signin.scss'
       </div>
       <button class="btn btn-lg btn-primary" style="width: 100%;" :disabled="isLoading" @click="onSubmit">登录</button>
       <p v-if="$session.config.signupAble" class="extras">
-        <router-link to="/signup"> >> 没有账号，点击注册</router-link>
+        <router-link :to="{ path: '/signup', query: $route.query }"> >> 没有账号，点击注册</router-link>
       </p>
     </div>
   `,
