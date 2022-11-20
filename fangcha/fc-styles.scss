@@ -336,3 +336,9 @@ ul.fc-clean-ul {
   padding-left: 10px;
   margin-bottom: 0;
 }
+
+.fc-single-line {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
