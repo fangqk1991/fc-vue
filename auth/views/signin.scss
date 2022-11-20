@@ -4,6 +4,7 @@
   padding: 15px;
   margin: 0 auto;
   text-align: center;
+  overflow: hidden;
 
   .logo {
     display: inline-block;
@@ -65,9 +66,8 @@
   }
 }
 
-.fc-sso-form-footer {
+.fc-promotion-footer {
   padding: 0.8em 0 3.6em;
-  margin-top: 1em;
   line-height: 2.5;
   color: #6e7173;
   text-align: center;
