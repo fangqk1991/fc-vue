@@ -1,8 +1,9 @@
 import { NavigationGuard, RouteConfig } from 'vue-router'
 import { Vue } from 'vue-property-decorator'
-import { FrontendPluginProtocol } from '../basic'
+import { EmptyConfig, FrontendPluginProtocol, Session } from '../basic'
 
-export interface BasicAppConfig {
+export interface BasicAppConfig<T extends EmptyConfig = {}> {
+  session?: Session<T>
   appName?: string
   routes?: RouteConfig[]
   mainPathPrefix?: string

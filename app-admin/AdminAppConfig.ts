@@ -2,7 +2,7 @@ import { Vue } from 'vue-property-decorator'
 import { NavigationGuard, RouteConfig } from 'vue-router'
 import { VisitorInfo } from '@fangcha/tools'
 import { MenuMainNode } from '../src/sidebars'
-import { FrontendPluginProtocol } from '../basic'
+import { EmptyConfig, FrontendPluginProtocol } from '../basic'
 import { BasicAppConfig } from '../app'
 
 export interface AdminCssStyle {
@@ -12,7 +12,7 @@ export interface AdminCssStyle {
   }
 }
 
-export interface AdminAppConfig extends BasicAppConfig {
+export interface AdminAppConfig<T extends EmptyConfig = {}> extends BasicAppConfig<T> {
   appName: string
   routes: RouteConfig[]
   appWillLoad?: () => void

@@ -11,6 +11,7 @@ import { I18nCode, I18nCodeDescriptor, MyConstants, MyNotificationKeys, SimpleVi
 import { RootView } from '../src/RootView'
 import { ViewController } from '../src/ViewController'
 import { BasicAppConfig } from './BasicAppConfig'
+import { EmptyConfig, Session } from '../basic'
 const cookie = require('cookie-browser')
 
 Vue.filter('ISO8601', function (val: any) {
@@ -39,10 +40,11 @@ Vue.filter(
   }
 )
 
-export class BasicApp implements BasicAppProtocol {
-  public config!: BasicAppConfig
+export class BasicApp<T extends EmptyConfig = {}> implements BasicAppProtocol {
+  public config!: BasicAppConfig<T>
   public isReady = false
   public router!: VueRouter
+  public session!: Session<T>
 
   // 为做到响应式而进行赋值
   public visitorInfo: SimpleVisitor = null as any
@@ -51,11 +53,17 @@ export class BasicApp implements BasicAppProtocol {
     return this.config.appName || ''
   }
 
-  public constructor(options: BasicAppConfig) {
+  public constructor(options: BasicAppConfig<T>) {
     this.config = options
     if (options.appName) {
       this.setTitle(options.appName)
     }
+    this.setSession(options.session || new Session<T>())
+  }
+
+  public setSession(session: Session<T>) {
+    this.session = session
+    Vue.prototype.$session = session
   }
 
   public plugins() {

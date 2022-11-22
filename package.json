@@ -1,6 +1,6 @@
 {
   "name": "@fangcha/vue",
-  "version": "0.64.0",
+  "version": "0.65.0",
   "main": "src/index.ts",
   "scripts": {
     "start": "webpack-dev-server --config webpack.admin-dev.js",
@@ -12,6 +12,7 @@
   },
   "repository": "https://github.com/fangqk1991/fc-vue.git",
   "keywords": [
+    "vue",
     "tools"
   ],
   "author": "fang <me@fangqk.com>",
@@ -34,7 +35,7 @@
     "@fangcha/account": "^0.13.0",
     "@fangcha/app-request": "^1.6.0",
     "@fangcha/assert": "^1.1.0",
-    "@fangcha/backend-kit": "^0.43.1",
+    "@fangcha/backend-kit": "^0.47.0",
     "@fangcha/eslint": "^0.3.2",
     "@fangcha/event-stat": "^0.6.0",
     "@fangcha/oss-service": "^0.6.0",
