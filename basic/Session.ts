@@ -3,7 +3,6 @@ import { AccountSimpleParams } from '@fangcha/account/lib/common/models'
 import { MyAxios } from './MyAxios'
 import { SessionInfo } from '@fangcha/backend-kit/lib/common/models'
 import { SessionHTTP, SessionUserInfo } from './SessionHTTP'
-import { MySession } from '../auth'
 
 const getParameterByName = (name: string, url = window.location.href) => {
   name = name.replace(/[[\]]/g, '\\$&')
@@ -60,7 +59,7 @@ export class Session<T extends EmptyConfig = {}> {
       [this.signupPagePath]: true,
     }
     const inLoginPage = loginPathMap[window.location.pathname]
-    if (MySession.checkLogin()) {
+    if (this.checkLogin()) {
       if (inLoginPage) {
         window.location.href = this.redirectUri()
       }
