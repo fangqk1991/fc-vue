@@ -1,9 +1,8 @@
-import { AuthPluginForClient, MySession } from '../../auth'
+import { AuthPluginForClient } from '../../auth'
 import { BasicApp } from '../../app'
 
 const app = new BasicApp({
   appName: 'Auth',
-  session: MySession,
   plugins: [AuthPluginForClient()],
   routes: [
     {

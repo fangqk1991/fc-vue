@@ -58,7 +58,7 @@ export class BasicApp<T extends EmptyConfig = {}> implements BasicAppProtocol {
     if (options.appName) {
       this.setTitle(options.appName)
     }
-    this.setSession(options.session || new Session<T>())
+    this.setSession(options.session || Vue.prototype.$session || new Session<T>())
   }
 
   public setSession(session: Session<T>) {
