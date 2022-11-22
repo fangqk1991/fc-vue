@@ -1,6 +1,4 @@
 import { KitAuthApis } from '@fangcha/backend-kit/lib/apis'
-import { AccountSimpleParams } from '@fangcha/account/lib/common/models'
-import { MyAxios } from './MyAxios'
 import { SessionInfo } from '@fangcha/backend-kit/lib/common/models'
 import { SessionHTTP, SessionUserInfo } from './SessionHTTP'
 
@@ -72,9 +70,5 @@ export class Session<T extends EmptyConfig = {}> {
     }
   }
 
-  public submitLogin = async (params: AccountSimpleParams) => {
-    const request = MyAxios(KitAuthApis.Login)
-    request.setBodyData(params)
-    await request.quickSend()
-  }
+  public submitLogin = async (_params: { email: string; password: string }) => {}
 }
