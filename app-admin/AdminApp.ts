@@ -133,6 +133,7 @@ export class AdminApp extends BasicApp {
   }
 
   protected async _appDidLoad() {
+    await this.session.reloadSessionInfo()
     if (!this.config.allowAnonymous) {
       await this.reloadUserInfo()
     }
