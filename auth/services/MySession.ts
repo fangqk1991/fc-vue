@@ -1,4 +1,4 @@
-import { Session } from '../../basic'
+import { AuthSession } from './AuthSession'
 
 interface SessionConfig {
   appName: string
@@ -16,4 +16,4 @@ const config: SessionConfig = {
   hidePromotion: false,
 }
 
-export const MySession = new Session(config)
+export const MySession = new AuthSession(config)
