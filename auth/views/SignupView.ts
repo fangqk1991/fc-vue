@@ -2,8 +2,8 @@ import { Component } from 'vue-property-decorator'
 import { MySession } from '../services/MySession'
 import { ViewController } from '../../src/ViewController'
 import './signin.scss'
-import { MyAxios } from '../services/MyAxios'
 import { SignupApis } from '@fangcha/sso-server/lib/common/web-api'
+import { MyAxios } from '../../basic'
 
 @Component({
   template: `

@@ -1,6 +1,7 @@
-import { ApiOptions, axiosBuilder } from '@fangcha/app-request'
+import { ApiOptions, AxiosBuilder } from '@fangcha/app-request'
 import { MessageBox } from 'element-ui'
 import { i18n } from '../src/i18n'
+import AppError, { ErrorModel } from '@fangcha/app-error'
 
 function showAlert(content: any, title: any) {
   if (content.errorMessage) {
@@ -12,41 +13,65 @@ function showAlert(content: any, title: any) {
   })
 }
 
-interface MyAxiosExtras {
-  mute?: boolean
-  useRedirecting?: boolean
-}
-
 export const AxiosSettings = {
-  loginUrl: '/api/v1/login'
+  loginUrl: '/api/v1/login',
 }
 
-export const MyAxios = (commonApi?: ApiOptions, extras: MyAxiosExtras = {}) => {
-  if (extras.useRedirecting === undefined) {
-    extras.useRedirecting = true
+export class _MyAxios extends AxiosBuilder {
+  useRedirecting = true
+  constructor() {
+    super()
+    this.addHeader('x-requested-with', 'XMLHttpRequest')
+    this.setErrorHandler((err) => {
+      const responseData = this.axiosResponse?.data as ErrorModel
+      switch (err.statusCode) {
+        case 401: {
+          if (this.useRedirecting) {
+            window.location.href = `${AxiosSettings.loginUrl}?redirectUri=${encodeURIComponent(window.location.href)}`
+            return
+          }
+          break
+        }
+        default: {
+          break
+        }
+      }
+
+      if (this._subErrorHandler) {
+        this._subErrorHandler(err)
+      }
+
+      const i18nPhrase = responseData?.phrase
+      let errMessage = (i18nPhrase && i18n.te(i18nPhrase) ? i18n.t(i18nPhrase) : i18nPhrase) as string
+      if (!errMessage) {
+        errMessage = typeof responseData === 'string' ? responseData : 'Unknown error'
+      }
+      if (this._errorMsgHandler) {
+        this._errorMsgHandler(errMessage, i18nPhrase)
+      } else if (!this._mute) {
+        showAlert(errMessage, 'Error')
+      }
+      throw err
+    })
   }
 
-  const builder = axiosBuilder()
-  builder.addHeader('x-requested-with', 'XMLHttpRequest')
+  protected _mute: boolean = false
+  public setMute(mute: boolean) {
+    this._mute = mute
+  }
+
+  protected _errorMsgHandler?: (errMsg: string, phrase: string) => void
+  public setErrorMsgHandler(handler: (errMsg: string, phrase: string) => void) {
+    this._errorMsgHandler = handler
+  }
+
+  protected _subErrorHandler?: (err: AppError) => void
+}
+
+export const MyAxios = (commonApi?: ApiOptions) => {
+  const builder = new _MyAxios()
   if (commonApi) {
     builder.setApiOptions(commonApi)
   }
-  builder.setErrorHandler((err) => {
-    if (extras.useRedirecting) {
-      switch (err.statusCode) {
-        case 401: {
-          if (new URLSearchParams(window.location.search).get('_noRedirecting') !== null) {
-            break
-          }
-          window.location.href = AxiosSettings.loginUrl
-          return
-        }
-      }
-    }
-    if (!extras.mute) {
-      showAlert(i18n.t(err.message), i18n.t('Error'))
-    }
-    throw err
-  })
   return builder
 }
