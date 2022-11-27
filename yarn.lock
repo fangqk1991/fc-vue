@@ -1123,10 +1123,10 @@
     tslib "^2.3.1"
     uuid "^3.3.3"
 
-"@fangcha/webpack@^0.9.1":
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/@fangcha/webpack/-/webpack-0.9.1.tgz#106abab6ee4a6ae7a809e9844ca5966b019b94ad"
-  integrity sha512-m3kbCxzVm6MBNuuEwXoInGTYwzIFSfBJUTHoWwr11+SvYlpeEy5vP8zRgZIdh6leBaxhhGanV44d4dohu7fCXg==
+"@fangcha/webpack@^0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@fangcha/webpack/-/webpack-0.10.0.tgz#3bf9b8b548faf170dcf4c130b9c9bd976a176260"
+  integrity sha512-I4sI/rB5Ujoc0L8ZCBg2LFU93f/2YS74Mkww9gWAtlfpPTREaZDW8d8TIGMW9o0ugzs4CFFes+3u3u4z0nxKlA==
   dependencies:
     "@babel/core" "^7.8.4"
     "@babel/plugin-proposal-decorators" "^7.8.3"

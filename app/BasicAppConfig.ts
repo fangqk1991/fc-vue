@@ -8,11 +8,11 @@ export interface BasicAppConfig<T extends EmptyConfig = {}> {
   routes?: RouteConfig[]
   mainPathPrefix?: string
   independentRoutes?: RouteConfig[]
-  appWillLoad?: () => void
-  appDidLoad?: () => Promise<void>
+  appWillLoad?: () => Promise<void> | void
+  appDidLoad?: () => Promise<void> | void
   pluginsDidLoad?: () => Promise<void>
   guardBeforeEachRoute?: NavigationGuard
   mainLayout?: typeof Vue
   homeView?: typeof Vue
-  plugins?: FrontendPluginProtocol[]
+  plugins?: FrontendPluginProtocol[] | (() => Promise<FrontendPluginProtocol[]>)
 }

@@ -11,7 +11,7 @@ import { I18nCode, I18nCodeDescriptor, MyConstants, MyNotificationKeys, SimpleVi
 import { RootView } from '../src/RootView'
 import { ViewController } from '../src/ViewController'
 import { BasicAppConfig } from './BasicAppConfig'
-import { EmptyConfig, Session } from '../basic'
+import { EmptyConfig, FrontendPluginProtocol, Session } from '../basic'
 const cookie = require('cookie-browser')
 
 Vue.filter('ISO8601', function (val: any) {
@@ -45,6 +45,7 @@ export class BasicApp<T extends EmptyConfig = {}> implements BasicAppProtocol {
   public isReady = false
   public router!: VueRouter
   public session!: Session<T>
+  protected _plugins: FrontendPluginProtocol[] = []
 
   // 为做到响应式而进行赋值
   public visitorInfo: SimpleVisitor = null as any
@@ -64,10 +65,6 @@ export class BasicApp<T extends EmptyConfig = {}> implements BasicAppProtocol {
   public setSession(session: Session<T>) {
     this.session = session
     Vue.prototype.$session = session
-  }
-
-  public plugins() {
-    return this.config.plugins || []
   }
 
   public setLocale(locale: I18nCode) {
@@ -109,7 +106,7 @@ export class BasicApp<T extends EmptyConfig = {}> implements BasicAppProtocol {
     if (this.config.independentRoutes) {
       independentRoutes.push(...this.config.independentRoutes)
     }
-    for (const plugin of this.plugins()) {
+    for (const plugin of this._plugins) {
       if (plugin.routes) {
         routes.push(...plugin.routes)
       }
@@ -147,26 +144,37 @@ export class BasicApp<T extends EmptyConfig = {}> implements BasicAppProtocol {
   protected async _appDidLoad() {}
 
   public launch() {
-    const plugins = this.plugins()
     i18n.locale = this.getLocale() === I18nCode.zhHans ? 'zh' : 'en'
     Vue.use(VueRouter)
     Vue.prototype.$app = this
 
-    const router = this.prepareRouter()
-    const appWillLoad = this.config.appWillLoad || (() => {})
-    appWillLoad()
-    for (const plugin of plugins) {
-      if (plugin.onAppWillLoad) {
-        plugin.onAppWillLoad()
-      }
-    }
-
-    const rootView = new RootView({
-      el: '#app',
-      router: router,
-      i18n: i18n,
-    })
     const handler = async () => {
+      const appWillLoad = this.config.appWillLoad || (() => {})
+      await appWillLoad()
+
+      {
+        const items = this.config.plugins || []
+        if (Array.isArray(items)) {
+          this._plugins = items
+        } else {
+          this._plugins = await items()
+        }
+      }
+
+      const router = this.prepareRouter()
+      const plugins = this._plugins
+      for (const plugin of plugins) {
+        if (plugin.onAppWillLoad) {
+          plugin.onAppWillLoad()
+        }
+      }
+
+      const rootView = new RootView({
+        el: '#app',
+        router: router,
+        i18n: i18n,
+      })
+
       await this._appDidLoad()
       const appDidLoad = this.config.appDidLoad || (async () => {})
       await appDidLoad()
