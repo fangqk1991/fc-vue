@@ -27,7 +27,9 @@ export class _MyAxios extends AxiosBuilder {
       switch (err.statusCode) {
         case 401: {
           if (this.useRedirecting) {
-            window.location.href = `${AxiosSettings.loginUrl}?redirectUri=${encodeURIComponent(window.location.href)}`
+            if (AxiosSettings.loginUrl !== window.location.pathname) {
+              window.location.href = `${AxiosSettings.loginUrl}?redirectUri=${encodeURIComponent(window.location.href)}`
+            }
             return
           }
           break
