@@ -1,11 +1,10 @@
 {
   "name": "@fangcha/vue",
-  "version": "0.67.0",
+  "version": "0.68.0",
   "main": "src/index.ts",
   "scripts": {
     "start": "webpack-dev-server --config webpack.admin-dev.js",
     "start-auth": "webpack-dev-server --config webpack.auth-dev.js",
-    "start-sso-client": "webpack-dev-server --config webpack.sso-client.js",
     "start-auth-for-server": "webpack-dev-server --config webpack.auth-for-server.js",
     "start-tiny": "webpack-dev-server --config webpack.dev.js",
     "build": "rm -rf dist && webpack --config webpack.test.js",

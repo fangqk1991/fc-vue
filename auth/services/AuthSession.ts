@@ -1,5 +1,5 @@
 import { KitAuthApis } from '@fangcha/backend-kit/lib/apis'
-import { EmptyConfig, Session } from '../../basic/Session'
+import { EmptyConfig, Session } from '../../basic'
 
 const getParameterByName = (name: string, url = window.location.href) => {
   name = name.replace(/[[\]]/g, '\\$&')

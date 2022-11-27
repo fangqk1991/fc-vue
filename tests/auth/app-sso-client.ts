@@ -1,15 +1,26 @@
-import { BasicApp } from '../../app'
-import { AxiosSettings, SessionHTTP } from '../../basic'
-import { KitAuthApis } from '@fangcha/backend-kit/lib/apis'
+import { BasicApp, SsoPlugin } from '../../app'
+import { FrontendPluginProtocol } from '../../basic'
 import { SsoUserView } from '../admin/SsoUserView'
+import { AuthPluginForClient, MySession } from '../../auth'
+import { AuthMode } from '@fangcha/account/lib/common/models'
 
 const app = new BasicApp({
   appName: 'SSO Client',
-  appWillLoad: () => {
-    AxiosSettings.loginUrl = KitAuthApis.RedirectLogin.route
-  },
-  appDidLoad: async () => {
-    await SessionHTTP.getUserInfo()
+  plugins: async () => {
+    await app.session.reloadSessionInfo()
+
+    const plugins: FrontendPluginProtocol[] = []
+    const authMode = app.session.config['authMode'] as AuthMode
+    switch (authMode) {
+      case AuthMode.Simple:
+        plugins.push(AuthPluginForClient())
+        app.setSession(MySession)
+        break
+      case AuthMode.SSO:
+        plugins.push(SsoPlugin())
+        break
+    }
+    return plugins
   },
   homeView: SsoUserView,
 })

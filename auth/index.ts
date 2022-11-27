@@ -2,7 +2,7 @@ import { MySession } from './services/MySession'
 import Vue from 'vue'
 import { LoginView } from './views/LoginView'
 import { ProfileView } from './views/ProfileView'
-import { FrontendPluginProtocol, MyAxios } from '../basic'
+import { AxiosSettings, FrontendPluginProtocol, MyAxios } from '../basic'
 import 'bootstrap'
 import { AccountSimpleParams } from '@fangcha/account/lib/common/models'
 import { LoginApis } from '@fangcha/sso-server/lib/common/web-api'
@@ -16,6 +16,7 @@ export * from './services/MySession'
 
 export const AuthPluginForClient = (): FrontendPluginProtocol => {
   Vue.prototype.$session = MySession
+  AxiosSettings.loginUrl = '/login'
   MySession.submitLogin = async (params: AccountSimpleParams) => {
     const request = MyAxios(KitAuthApis.Login)
     request.setBodyData(params)
