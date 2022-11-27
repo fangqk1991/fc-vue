@@ -1,5 +1,7 @@
 import { SessionInfo } from '@fangcha/backend-kit/lib/common/models'
-import { SessionHTTP, SessionUserInfo } from './SessionHTTP'
+import { SessionUserInfo } from './SessionHTTP'
+import { MyAxios } from './MyAxios'
+import { RetainedSessionApis } from '@fangcha/backend-kit/lib/common/apis'
 
 export interface EmptyConfig {}
 
@@ -13,9 +15,17 @@ export class Session<T extends EmptyConfig = {}> {
   }
 
   public async reloadSessionInfo() {
-    const response = await SessionHTTP.getSessionInfo<SessionInfo<T>>()
-    this.curUser = response.userInfo
-    Object.assign(this.config, response.config)
+    const request = MyAxios(RetainedSessionApis.SessionInfoGet)
+    request.setMute(true)
+    await request
+      .quickSend<SessionInfo<T>>()
+      .then((response) => {
+        this.curUser = response.userInfo
+        Object.assign(this.config, response.config)
+      })
+      .catch((err) => {
+        console.error(err)
+      })
     return !!this.curUser
   }
 
