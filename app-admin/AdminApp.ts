@@ -1,6 +1,6 @@
 import { RouteConfig } from 'vue-router'
 import { NotificationCenter } from 'notification-center-js'
-import { makeUUID, VisitorInfo } from '@fangcha/tools'
+import { I18nCode, makeUUID, VisitorInfo } from '@fangcha/tools'
 import { BasicApp } from '../app'
 import { MenuMainNode, MenuSubNode } from '../src/sidebars'
 import { i18n } from '../src/i18n'
@@ -77,7 +77,21 @@ export class AdminApp extends BasicApp {
   }
 
   public async reloadUserInfo() {
-    this.visitorInfo = await this.config.reloadUserInfo!()
+    if (this.config.reloadUserInfo) {
+      this.visitorInfo = await this.config.reloadUserInfo!()
+    } else if (this.session.curUser) {
+      const email = this.session.curUser.email || ''
+      this.visitorInfo = {
+        iamId: 0,
+        email: email,
+        name: email.split('@')[0],
+        permissionKeyMap: {},
+        // isAdmin: true,
+        locale: I18nCode.en,
+      }
+    } else {
+      this.visitorInfo = null as any
+    }
     if (this.config.useRemoteLocale) {
       this.setLocale(this.visitorInfo.locale)
     }
