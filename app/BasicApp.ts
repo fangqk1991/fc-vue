@@ -155,6 +155,15 @@ export class BasicApp<T extends EmptyConfig = {}> implements BasicAppProtocol {
       const appWillLoad = this.config.appWillLoad || (() => {})
       await appWillLoad()
 
+      if (this.config.i18nMap) {
+        extendsI18n(this.config.i18nMap)
+      }
+      if (this.config.vueFuncMap) {
+        Object.keys(this.config.vueFuncMap).forEach((key) => {
+          Vue.filter(key, this.config.vueFuncMap![key])
+        })
+      }
+
       {
         const items = this.config.plugins || []
         if (Array.isArray(items)) {

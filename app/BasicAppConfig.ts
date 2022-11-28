@@ -1,10 +1,13 @@
 import { NavigationGuard, RouteConfig } from 'vue-router'
 import { Vue } from 'vue-property-decorator'
 import { EmptyConfig, FrontendPluginProtocol, Session } from '../basic'
+import { LocaleDict } from '../src/i18n'
 
 export interface BasicAppConfig<T extends EmptyConfig = {}> {
   session?: Session<T>
   appName?: string
+  i18nMap?: LocaleDict
+  vueFuncMap?: { [funcName: string]: Function }
   routes?: RouteConfig[]
   mainPathPrefix?: string
   independentRoutes?: RouteConfig[]
