@@ -4,7 +4,7 @@ import { BasicAppProtocol } from './BasicAppProtocol'
 import { Component, Vue } from 'vue-property-decorator'
 import VueRouter, { RouteConfig } from 'vue-router'
 import * as moment from 'moment'
-import { i18n } from '../src/i18n'
+import { extendsI18n, i18n } from '../src/i18n'
 import { NotificationCenter } from 'notification-center-js'
 import { Page404 } from './views/Page404'
 import { I18nCode, I18nCodeDescriptor, MyConstants, MyNotificationKeys, SimpleVisitor, sleep } from '@fangcha/tools'
@@ -12,7 +12,10 @@ import { RootView } from '../src/RootView'
 import { ViewController } from '../src/ViewController'
 import { BasicAppConfig } from './BasicAppConfig'
 import { EmptyConfig, FrontendPluginProtocol, Session } from '../basic'
+import { SystemI18n } from './i18n/SystemI18n'
 const cookie = require('cookie-browser')
+
+extendsI18n(SystemI18n)
 
 Vue.filter('ISO8601', function (val: any) {
   return moment(val).format()
@@ -166,6 +169,14 @@ export class BasicApp<T extends EmptyConfig = {}> implements BasicAppProtocol {
       for (const plugin of plugins) {
         if (plugin.onAppWillLoad) {
           plugin.onAppWillLoad()
+        }
+        if (plugin.i18nMap) {
+          extendsI18n(plugin.i18nMap)
+        }
+        if (plugin.vueFuncMap) {
+          Object.keys(plugin.vueFuncMap).forEach((key) => {
+            Vue.filter(key, plugin.vueFuncMap![key])
+          })
         }
       }
 

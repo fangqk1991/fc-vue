@@ -3,7 +3,7 @@ import VueI18n from 'vue-i18n'
 
 Vue.use(VueI18n)
 
-interface LocaleDict {
+export interface LocaleDict {
   [p: string]: { en: string; [p: string]: string }
 }
 

@@ -10,7 +10,7 @@ import { ViewController } from '../ViewController'
     <my-select v-model="myValue" @change="onDataChanged">
       <option value="">{{ title }}</option>
       <option v-for="option in options" :key="option.value" :value="option.value">
-        {{ LS(option.label) }}
+        {{ option.label }}
       </option>
     </my-select>
   `,
