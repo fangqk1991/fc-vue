@@ -8,6 +8,7 @@ export interface BasicAppConfig<T extends EmptyConfig = {}> {
   appName?: string
   i18nMap?: LocaleDict
   vueFuncMap?: { [funcName: string]: Function }
+  refreshIfVersionChanged?: boolean
   routes?: RouteConfig[]
   mainPathPrefix?: string
   independentRoutes?: RouteConfig[]

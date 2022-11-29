@@ -200,7 +200,15 @@ export class BasicApp<T extends EmptyConfig = {}> implements BasicAppProtocol {
         i18n: i18n,
       })
 
+      await this.session.reloadSessionInfo()
+      if (this.config.refreshIfVersionChanged) {
+        await this.session.handleIfCodeVersionChanged(async () => {
+          window.location.reload()
+        })
+      }
+
       await this._appDidLoad()
+
       const appDidLoad = this.config.appDidLoad || (async () => {})
       await appDidLoad()
       for (const plugin of plugins) {
