@@ -8,7 +8,7 @@ import '../plugins/element-ui-plugin'
     <el-select v-model="myValue" :size="size" :filterable="filterable" @change="onDataChanged">
       <el-option key="" :label="firstTitle" value="" />
       <template v-if="useI18n">
-        <el-option v-for="item in options" :key="item.value" :label="LS(item.label)" :value="item.value" />
+        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
       </template>
       <template v-else>
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
