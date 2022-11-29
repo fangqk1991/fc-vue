@@ -54,11 +54,12 @@ export const AuthPluginForClient = (): FrontendPluginProtocol => {
 }
 
 export const AuthPluginForServer = (): FrontendPluginProtocol => {
+  const plugin = AuthPluginForClient()
   MySession.logoutApiPath = LoginApis.Logout.route
   MySession.submitLogin = async (params: AccountSimpleParams) => {
     const request = MyAxios(LoginApis.LoginWithEmail)
     request.setBodyData(params)
     await request.quickSend()
   }
-  return AuthPluginForClient()
+  return plugin
 }
