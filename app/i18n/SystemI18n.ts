@@ -43,6 +43,10 @@ export const SystemI18n = {
     en: `Download`,
     zh: `下载`,
   },
+  Retry: {
+    en: `Retry`,
+    zh: `重试`,
+  },
   Add: {
     en: `Add`,
     zh: `添加`,

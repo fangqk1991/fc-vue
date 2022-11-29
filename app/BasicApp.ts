@@ -17,31 +17,36 @@ const cookie = require('cookie-browser')
 
 extendsI18n(SystemI18n)
 
-Vue.filter('ISO8601', function (val: any) {
+Vue.filter('ISO8601', (val: any) => {
   return moment(val).format()
 })
-Vue.filter('Unix_To_ISO8601', function (val: any) {
+Vue.filter('Unix_To_ISO8601', (val: any) => {
   return moment.unix(val).format()
 })
-Vue.filter('describe_locale', function (val: any) {
+Vue.filter('describe_locale', (val: any) => {
   return I18nCodeDescriptor.describe(val)
 })
-Vue.filter(
-  'digit_format',
-  function (n: number | string, digits: number = 2, maximumFractionDigits: number | null = null) {
-    if (n === '' || n === null || n === undefined) {
-      return ''
-    }
-    if (maximumFractionDigits === null) {
-      maximumFractionDigits = digits
-    }
-    const config =
-      digits === 0 && maximumFractionDigits === 0
-        ? {}
-        : { maximumFractionDigits: maximumFractionDigits, minimumFractionDigits: digits }
-    return Number(n).toLocaleString('en-US', config)
+Vue.filter('digit_format', (n: number | string, digits: number = 2, maximumFractionDigits: number | null = null) => {
+  if (n === '' || n === null || n === undefined) {
+    return ''
   }
-)
+  if (maximumFractionDigits === null) {
+    maximumFractionDigits = digits
+  }
+  const config =
+    digits === 0 && maximumFractionDigits === 0
+      ? {}
+      : { maximumFractionDigits: maximumFractionDigits, minimumFractionDigits: digits }
+  return Number(n).toLocaleString('en-US', config)
+})
+Vue.filter('size_format', (size: number) => {
+  let unit
+  const units = ['B', 'KB', 'MB', 'GB', 'TB']
+  while ((unit = units.shift()) && size > 1024) {
+    size = size / 1024
+  }
+  return `${unit === 'B' ? size : size.toFixed(2)}${unit}`
+})
 
 export class BasicApp<T extends EmptyConfig = {}> implements BasicAppProtocol {
   public config!: BasicAppConfig<T>

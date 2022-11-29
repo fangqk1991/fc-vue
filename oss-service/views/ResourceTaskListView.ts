@@ -11,31 +11,33 @@ import { ResourceTaskModel, ResourceTaskStatus } from '@fangcha/oss-service/lib/
   },
   template: `
     <div>
-      <h2>下载列表</h2>
+      <h2>{{ LS('[i18n.oss] My Downloads') }}</h2>
       <my-table-view ref="tableView" :delegate="delegate">
-        <el-table-column label="导出时间">
+        <el-table-column :label="LS('[i18n.oss] Export Time')">
           <template slot-scope="scope">
             {{ scope.row.createTime | ISO8601 }}
           </template>
         </el-table-column>
-        <el-table-column label="文件名" prop="fileName" />
-        <el-table-column label="文件大小">
+        <el-table-column :label="LS('[i18n.oss] File Name')" prop="fileName" />
+        <el-table-column :label="LS('[i18n.oss] File Size')">
           <template slot-scope="scope">
-            <span v-if="scope.row.size">{{ formatSize(scope.row.size) }}</span>
+            <span v-if="scope.row.size">{{ scope.row.size | size_format }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="任务状态" prop="taskStatus" />
-        <el-table-column label="操作">
+        <el-table-column :label="LS('Status')" prop="taskStatus" />
+        <el-table-column :label="LS('Action')">
           <template slot-scope="scope">
             <template v-if="scope.row.taskStatus === ResourceTaskStatus.Processing">
-              <span>文件生成中 {{ scope.row.current }} / {{ scope.row.total }}</span>
+              <span>{{ LS('[i18n.oss] File Generating') }} {{ scope.row.current }} / {{ scope.row.total }}</span>
             </template>
             <template v-if="scope.row.taskStatus === ResourceTaskStatus.Fail">
-              <span>生成失败</span>
+              <span>{{ LS('[i18n.oss] Generate Fail') }}</span>
               |
-              <a href="javascript:" @click="retryDownload(scope.row)">重新下载</a>
+              <a href="javascript:" @click="retryDownload(scope.row)">{{ LS('Retry') }}</a>
             </template>
-            <a v-if="scope.row.taskStatus === ResourceTaskStatus.Success" :href="scope.row.downloadUrl" target="_blank">下载</a>
+            <a v-if="scope.row.taskStatus === ResourceTaskStatus.Success" :href="scope.row.downloadUrl" target="_blank">
+              {{ LS('Download') }}
+            </a>
           </template>
         </el-table-column>
       </my-table-view>
@@ -86,19 +88,10 @@ export class ResourceTaskListView extends ViewController {
     }
   }
 
-  formatSize(size: number) {
-    let unit
-    const units = ['B', 'KB', 'MB', 'GB', 'TB']
-    while ((unit = units.shift()) && size > 1024) {
-      size = size / 1024
-    }
-    return `${unit === 'B' ? size : size.toFixed(2)}${unit}`
-  }
-
   async retryDownload(data: ResourceTaskModel) {
     const request = MyAxios(new CommonAPI(DownloadApis.ResourceTaskRetry, data.taskKey))
     await request.quickSend()
-    this.$message.success('已提交重试')
+    this.$message.success(this.LS('[i18n.oss] Retry Submitted') as string)
     this.tableView().reloadData()
   }
 }
