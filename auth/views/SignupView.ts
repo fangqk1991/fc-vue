@@ -16,7 +16,7 @@ import { MyAxios } from '../../basic'
       <div class="input-group input-last">
         <input v-model="params.password" type="password" class="form-control" placeholder="密码" autocomplete="new-password" required @keyup.enter="onSubmit"/>
       </div>
-      <button class="btn btn-lg btn-primary" style="width: 100%;" :disabled="isLoading" @click="onSubmit">登录</button>
+      <button class="btn btn-lg btn-primary" style="width: 100%;" :disabled="isLoading" @click="onSubmit">注册</button>
       <p class="extras">
         <router-link :to="{ path: '/login', query: $route.query }"> >> 已有账号，点击登录</router-link>
       </p>
