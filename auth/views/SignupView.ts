@@ -1,13 +1,16 @@
 import { Component } from 'vue-property-decorator'
 import { MySession } from '../services/MySession'
 import { ViewController } from '../../src/ViewController'
-import './signin.scss'
 import { SignupApis } from '@fangcha/sso-server/lib/common/web-api'
 import { MyAxios } from '../../basic'
+import { LoginLayout } from './LoginLayout'
 
 @Component({
+  components: {
+    'login-layout': LoginLayout,
+  },
   template: `
-    <div class="fc-sso-form">
+    <login-layout>
       <div class="logo mb-4" :style="logoStyle" />
       <div class="h3 mb-3 font-weight-normal">注册账号</div>
       <div class="input-group input-first">
@@ -20,7 +23,7 @@ import { MyAxios } from '../../basic'
       <p class="extras">
         <router-link :to="{ path: '/login', query: $route.query }"> >> 已有账号，点击登录</router-link>
       </p>
-    </div>
+    </login-layout>
   `,
 })
 export class SignupView extends ViewController {

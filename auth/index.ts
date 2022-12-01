@@ -6,7 +6,6 @@ import { AxiosSettings, FrontendPluginProtocol, MyAxios } from '../basic'
 import 'bootstrap'
 import { AccountSimpleParams } from '@fangcha/account/lib/common/models'
 import { LoginApis } from '@fangcha/sso-server/lib/common/web-api'
-import { LoginLayout } from './views/LoginLayout'
 import { SignupView } from './views/SignupView'
 import { KitAuthApis } from '@fangcha/backend-kit/lib/apis'
 
@@ -29,25 +28,19 @@ export const AuthPluginForClient = (): FrontendPluginProtocol => {
     },
     independentRoutes: [
       {
-        path: '',
-        component: LoginLayout,
-        children: [
-          {
-            path: '/login',
-            component: LoginView,
-            name: 'LoginView',
-          },
-          {
-            path: '/signup',
-            component: SignupView,
-            name: 'SignupView',
-          },
-          {
-            path: '/profile',
-            component: ProfileView,
-            name: 'ProfileView',
-          },
-        ],
+        path: '/login',
+        component: LoginView,
+        name: 'LoginView',
+      },
+      {
+        path: '/signup',
+        component: SignupView,
+        name: 'SignupView',
+      },
+      {
+        path: '/profile',
+        component: ProfileView,
+        name: 'ProfileView',
       },
     ],
   }

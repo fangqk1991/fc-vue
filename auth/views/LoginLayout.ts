@@ -11,7 +11,9 @@ import './signin.scss'
           Powered by <a target="_blank" href="https://github.com/fangqk1991/sso-app"> fangqk1991/sso-app</a>
         </template>
       </div>
-      <router-view />
+      <div class="fc-sso-form">
+        <slot />
+      </div>
     </div>
   `,
 })
@@ -29,12 +31,5 @@ export class LoginLayout extends ViewController {
     return {
       background: this.$session.config.background,
     }
-  }
-
-  async onSubmit() {
-    await this.execHandler(async () => {
-      await MySession.submitLogin(this.params)
-      await MySession.onLoginSuccess()
-    })
   }
 }
