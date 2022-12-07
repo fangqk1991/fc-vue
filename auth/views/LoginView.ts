@@ -1,14 +1,11 @@
 import { Component } from 'vue-property-decorator'
 import { MySession } from '../services/MySession'
 import { ViewController } from '../../src/ViewController'
-import { LoginLayout } from './LoginLayout'
+import './signin.scss'
 
 @Component({
-  components: {
-    'login-layout': LoginLayout,
-  },
   template: `
-    <login-layout>
+    <div class="fc-sso-form">
       <div class="logo mb-4" :style="logoStyle" />
       <div class="h3 mb-3 font-weight-normal">请登录</div>
       <div class="input-group input-first">
@@ -21,7 +18,7 @@ import { LoginLayout } from './LoginLayout'
       <p v-if="$session.config.signupAble" class="extras">
         <router-link :to="{ path: '/signup', query: $route.query }"> >> 没有账号，点击注册</router-link>
       </p>
-    </login-layout>
+    </div>
   `,
 })
 export class LoginView extends ViewController {
