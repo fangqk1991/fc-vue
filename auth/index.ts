@@ -29,7 +29,7 @@ export const AuthPluginForClient = (): FrontendPluginProtocol => {
     },
     independentRoutes: [
       {
-        path: '',
+        path: '/login-and-signup-layout',
         component: LoginLayout,
         children: [
           {
